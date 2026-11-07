@@ -168,6 +168,24 @@ section{position:relative}
 .tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:6px;transform:translateZ(24px)}
 .tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
 
+/* ---------- projects ---------- */
+.projects{padding:0 0 clamp(110px,16vw,200px)}
+.projs{margin-top:72px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.proj{display:flex;flex-direction:column;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(15,22,42,.78),rgba(6,9,18,.85));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;transition:border-color .4s}
+.proj:hover{border-color:var(--line-2)}
+.proj-shot{margin:14px 14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#05070d}
+.proj-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03)}
+.proj-bar i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.proj-bar span{margin-left:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.proj-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.proj:hover .proj-shot img{transform:scale(1.04)}
+.proj-body{padding:26px 26px 30px}
+.proj-meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.proj h3{margin-top:18px;font-size:clamp(24px,2.4vw,32px);font-weight:500;letter-spacing:-.02em;line-height:1.1;display:flex;justify-content:space-between;gap:16px}
+.proj-go{color:var(--cyan);transition:transform .4s}
+.proj:hover .proj-go{transform:translate(3px,-3px)}
+.proj p{margin-top:14px;color:var(--muted);font-size:15px;font-weight:300}
+
 /* ---------- marquee ---------- */
 .stack{padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(4,6,12,.7)}
 .mq-row{display:flex;white-space:nowrap;will-change:transform}
@@ -237,6 +255,8 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
   .nav-links{display:none}
   .nav-cta{padding:9px 14px;font-size:11px}
   .cards{grid-template-columns:1fr}
+  .projs{grid-template-columns:1fr}
+  .proj-body{padding:22px 20px 26px}
   .hud-tr,.side-hud{display:none}
   .hud-bl,.hud-br{display:none}
   .scroll-hint{bottom:20px}
@@ -278,9 +298,10 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
   </a>
   <nav class="nav-links" aria-label="Principal">
     <a href="#servicos" data-idx="01" data-hover-scramble>SERVIÇOS</a>
-    <a href="#experiencia" data-idx="02" data-hover-scramble>TRAJETÓRIA</a>
-    <a href="#contato" data-idx="03" data-hover-scramble>CONTATO</a>
-    <a href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener" data-idx="04" data-hover-scramble>CURRÍCULO</a>
+    <a href="#projetos" data-idx="02" data-hover-scramble>PROJETOS</a>
+    <a href="#experiencia" data-idx="03" data-hover-scramble>TRAJETÓRIA</a>
+    <a href="#contato" data-idx="04" data-hover-scramble>CONTATO</a>
+    <a href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener" data-idx="05" data-hover-scramble>CURRÍCULO</a>
   </nav>
   <a class="nav-cta magnetic" href="https://wa.me/5511994480107?text=Ol%C3%A1!%20Vi%20seu%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><span class="dot"></span>DISPONÍVEL</a>
 </header>
@@ -382,6 +403,46 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
             <div class="tags"><span>Arquitetura</span><span>Performance</span><span>Stack</span></div>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projetos" data-section="PROJETOS">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow reveal" data-scramble>Projetos</div>
+          <h2 class="h2 reveal">Trabalhos no ar, <span class="soft">em uso de verdade.</span></h2>
+        </div>
+        <span class="mono reveal">/ selected_work_2026</span>
+      </div>
+
+      <div class="projs">
+        <a class="proj reveal" href="https://www.plancar.com.br/" target="_blank" rel="noopener" data-cursor="VISITAR">
+          <div class="proj-shot">
+            <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>plancar.com.br</span></div>
+            <img src="img/projeto-plancar.jpg" alt="Página inicial do PlanCar, sistema de agendamento online para lava-rápidos" width="1200" height="750" loading="lazy">
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><span class="card-num">01</span><span class="mono">SAAS · CLIENTE REAL</span></div>
+            <h3>PlanCar <span class="proj-go" aria-hidden="true">↗</span></h3>
+            <p>Sistema de agendamento online para lava-rápidos: o cliente agenda pelo celular, e o negócio controla agenda, fila do dia, equipe, pagamentos antecipados com Pix e cartão e relatórios.</p>
+            <div class="tags"><span>SaaS</span><span>Agendamento</span><span>Pix</span><span>Mercado Pago</span><span>Responsivo</span></div>
+          </div>
+        </a>
+        <a class="proj reveal" href="https://pedroemerich.github.io/Demonstration_Pages/catalogo.html" target="_blank" rel="noopener" data-cursor="VISITAR">
+          <div class="proj-shot">
+            <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Demonstration_Pages</span></div>
+            <img src="img/projeto-catalogo.jpg" alt="Catálogo com dezenas de modelos de landing page, com filtros por segmento" width="1200" height="750" loading="lazy">
+          </div>
+          <div class="proj-body">
+            <div class="proj-meta"><span class="card-num">02</span><span class="mono">VITRINE · 36 MODELOS</span></div>
+            <h3>Catálogo de Landing Pages <span class="proj-go" aria-hidden="true">↗</span></h3>
+            <p>Vitrine com 36 landing pages prontas para adaptar a cada negócio — saúde, advocacia, gastronomia, automotivo e mais —, com filtros por segmento e visualização em computador, tablet e celular.</p>
+            <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>WebGL</span><span>Animações</span></div>
+          </div>
+        </a>
       </div>
     </div>
   </section>
