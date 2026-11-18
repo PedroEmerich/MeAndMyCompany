@@ -185,6 +185,20 @@ section{position:relative}
 .proj-go{color:var(--cyan);transition:transform .4s}
 .proj:hover .proj-go{transform:translate(3px,-3px)}
 .proj p{margin-top:14px;color:var(--muted);font-size:15px;font-weight:300}
+.proj-wide{grid-column:1/-1}
+.proj-intro p{max-width:72ch}
+.demos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 14px 14px}
+.demo{display:flex;flex-direction:column;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:border-color .4s}
+.demo:hover{border-color:var(--line-2)}
+.demo .proj-shot{margin:10px 10px 0}
+.proj-wide:hover .proj-shot img,.proj-wide:hover .proj-go{transform:none}
+.demo:hover .proj-shot img{transform:scale(1.04)}
+.demo-body{padding:20px 16px 22px}
+.demo h4{margin-top:12px;font-size:clamp(20px,1.8vw,24px);font-weight:500;letter-spacing:-.02em;line-height:1.15;display:flex;justify-content:space-between;gap:16px}
+.demo:hover .proj-go{transform:translate(3px,-3px)}
+.demo p{font-size:14.5px}
+.demo-hint{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim)}
+.demo-hint b{color:var(--cyan);font-weight:500}
 
 /* ---------- marquee ---------- */
 .stack{padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(4,6,12,.7)}
@@ -256,6 +270,7 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
   .nav-cta{padding:9px 14px;font-size:11px}
   .cards{grid-template-columns:1fr}
   .projs{grid-template-columns:1fr}
+  .demos{grid-template-columns:minmax(0,1fr);padding:0 10px 10px}
   .proj-body{padding:22px 20px 26px}
   .hud-tr,.side-hud{display:none}
   .hud-bl,.hud-br{display:none}
@@ -443,6 +458,39 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
             <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>WebGL</span><span>Animações</span></div>
           </div>
         </a>
+        <article class="proj proj-wide reveal">
+          <div class="proj-body proj-intro">
+            <div class="proj-meta"><span class="card-num">03</span><span class="mono">AGENDAMENTO · 2 DEMONSTRAÇÕES</span></div>
+            <h3>Sistema de Agendamento</h3>
+            <p>Agendamento online sob medida para cada negócio: do formulário que leva o paciente direto ao WhatsApp até o sistema completo com conta do cliente, pagamento antecipado e painel da equipe.</p>
+            <div class="tags"><span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind</span><span>Three.js</span><span>WhatsApp</span><span>Pix</span></div>
+          </div>
+          <div class="demos">
+            <a class="demo" href="https://pedroemerich.github.io/Agendamento_Barbearia/" target="_blank" rel="noopener" data-cursor="VISITAR">
+              <div class="proj-shot">
+                <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Agendamento_Barbearia</span></div>
+                <img src="img/projeto-barbearia.jpg" alt="Página inicial da Underground Barbershop, com o botão Agendar horário" width="1200" height="750" loading="lazy">
+              </div>
+              <div class="demo-body">
+                <span class="mono">DEMO 01 · BARBEARIA</span>
+                <h4>Underground Barbershop <span class="proj-go" aria-hidden="true">↗</span></h4>
+                <p>Agendamento em 5 passos, conta do cliente, planos de assinatura, pagamento com Pix e cartão e painel do barbeiro com agenda, relatórios e exportação para PDF e Excel.</p>
+                <span class="demo-hint">Painel do dono: entre com <b>admin</b> · senha <b>demo</b></span>
+              </div>
+            </a>
+            <a class="demo" href="https://pedroemerich.github.io/Clinica_Reumatologia_LP/" target="_blank" rel="noopener" data-cursor="VISITAR">
+              <div class="proj-shot">
+                <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Clinica_Reumatologia_LP</span></div>
+                <img src="img/projeto-clinica.jpg" alt="Página inicial da Creass Reumatologia, com uma coluna vertebral em 3D" width="1200" height="750" loading="lazy">
+              </div>
+              <div class="demo-body">
+                <span class="mono">DEMO 02 · CLÍNICA</span>
+                <h4>Creass Reumatologia <span class="proj-go" aria-hidden="true">↗</span></h4>
+                <p>Agendamento de consultas pelo WhatsApp: o formulário monta a mensagem com especialidade, período e convênio. Mostra se a clínica está aberta agora e tem uma coluna vertebral em 3D.</p>
+              </div>
+            </a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
