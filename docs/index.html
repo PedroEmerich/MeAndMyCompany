@@ -3,358 +3,474 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SBC Dev — Engenharia de Software Sob Medida</title>
-<meta name="description" content="SBC Dev — engenharia de software sob medida. Full stack, mobile, banco de dados e modernização de sistemas. São Bernardo do Campo, SP.">
-<meta name="theme-color" content="#04060c">
+<title>EMERICH Tech Solution — Soluções tecnológicas para o seu negócio</title>
+<meta name="description" content="Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados. São Paulo - SP e região.">
+<meta name="theme-color" content="#050505">
+<meta property="og:title" content="EMERICH Tech Solution">
+<meta property="og:description" content="Tecnologia que soluciona. Sistemas, automações, integrações e sites sob medida.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF6A00'/%3E%3Cg fill='%23fff' transform='translate(16 14) skewX(-20)'%3E%3Crect x='6' width='32' height='9' rx='1'/%3E%3Crect x='6' y='14.5' width='24' height='8' rx='1'/%3E%3Crect x='6' y='28' width='32' height='9' rx='1'/%3E%3Crect x='6' width='9' height='37' rx='1'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#04060c;
-  --bg-2:#080c17;
-  --fg:#e9eefb;
-  --muted:#8792ad;
-  --dim:#4a5470;
-  --blue:#3b82f6;
-  --cyan:#22d3ee;
-  --violet:#8b5cf6;
-  --line:rgba(140,165,220,.12);
-  --line-2:rgba(140,165,220,.22);
-  --glass:rgba(10,15,30,.55);
-  --pad:clamp(16px,4vw,56px);
-  --mono:'JetBrains Mono',ui-monospace,monospace;
-  --sans:'Space Grotesk',system-ui,sans-serif;
+  --bg:#050505;--bg-2:#0c0c0d;--fg:#f7f4f1;--muted:rgba(247,244,241,.64);--dim:rgba(247,244,241,.4);
+  --line:rgba(255,255,255,.08);--line-2:rgba(255,255,255,.16);
+  --or:#FF6A00;--or-2:#FF8A2B;--peach:#FFD6B8;
+  --glass:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+  --pad:clamp(20px,4.5vw,64px);--max:1320px;
+  --ease:cubic-bezier(.2,.8,.2,1);
   color-scheme:dark;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--bg)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{background:var(--bg);color:var(--fg);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.5}
+body{background:var(--bg);color:var(--fg);font-family:'Montserrat',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--blue);color:#fff}
-body.loading{overflow:hidden}
+img{display:block;max-width:100%}
+button,input,textarea{font:inherit;color:inherit}
+::selection{background:var(--or);color:#000}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.or{color:var(--or)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ---------- layers ---------- */
-#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.bg-grid{position:fixed;inset:0;z-index:1;pointer-events:none;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:72px 72px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 0%,transparent 75%);
-  mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 0%,transparent 75%);opacity:.45}
-.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(2,3,8,.85) 100%)}
-header,main,footer{position:relative;z-index:3}
+/* ---------- background ---------- */
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.no-gl #bg{display:none}
+.no-gl body{background:radial-gradient(900px 600px at 85% 85%,rgba(255,106,0,.28),transparent 60%),radial-gradient(700px 500px at 10% 0%,rgba(255,106,0,.08),transparent 60%),var(--bg) fixed}
+.grid-bg{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:88px 88px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 10%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 10%,transparent 75%);opacity:.45}
 
 /* ---------- loader ---------- */
-.loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad);font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.12em}
-.loader-top,.loader-bot{display:flex;justify-content:space-between;gap:16px}
-.loader-count{font-family:var(--sans);font-weight:300;font-size:clamp(80px,18vw,240px);color:var(--fg);line-height:.85;letter-spacing:-.04em}
-.loader-bar{height:1px;background:var(--line-2);position:relative;overflow:hidden;margin-top:16px}
-.loader-bar span{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;transform:scaleX(0)}
+.loader{position:fixed;inset:0;z-index:200;background:#030303;display:grid;place-items:center;transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
+.loaded .loader{clip-path:inset(0 0 100% 0);pointer-events:none}
+.loader-in{display:flex;flex-direction:column;align-items:center;gap:28px}
+.loader .emark{width:96px;height:auto}
+.loader .emark rect{transform-box:fill-box;transform-origin:left;animation:barIn .9s var(--ease) both}
+.loader .emark rect:nth-child(2){animation-delay:.12s}
+.loader .emark rect:nth-child(3){animation-delay:.24s}
+.loader .emark rect:nth-child(4){animation-delay:.36s;transform-origin:top}
+@keyframes barIn{from{transform:scaleX(0)}to{transform:none}}
+.loader .emark rect:nth-child(4){animation-name:stemIn}
+@keyframes stemIn{from{transform:scaleY(0)}to{transform:none}}
+.loader-meta{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:.32em;color:var(--dim)}
+.loader-num{color:var(--fg);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
+.loader-bar{width:180px;height:2px;background:var(--line-2);border-radius:2px;overflow:hidden}
+.loader-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--or),var(--or-2));transform-origin:left;transform:scaleX(0)}
 
 /* ---------- cursor ---------- */
-#cursor{position:fixed;left:0;top:0;z-index:200;pointer-events:none;display:none;mix-blend-mode:difference}
-body.has-cursor #cursor{display:block}
-body.has-cursor,body.has-cursor a,body.has-cursor button{cursor:none}
-.c-dot{position:fixed;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#fff}
-.c-ring{position:fixed;width:38px;height:38px;margin:-19px 0 0 -19px;border-radius:50%;border:1px solid rgba(255,255,255,.7);display:grid;place-items:center;transition:width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),margin .35s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s}
-.c-label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#000;opacity:0;transition:opacity .2s}
-#cursor.hover .c-ring{width:72px;height:72px;margin:-36px 0 0 -36px;background:#fff;border-color:#fff}
-#cursor.hover .c-label{opacity:1}
+.cursor{position:fixed;left:0;top:0;z-index:150;pointer-events:none;display:none}
+.has-cursor .cursor{display:block}
+.has-cursor,.has-cursor a,.has-cursor button,.has-cursor input,.has-cursor textarea,.has-cursor label{cursor:none}
+.c-dot{position:absolute;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--or)}
+.c-ring{position:absolute;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:1px solid rgba(255,106,0,.55);display:grid;place-items:center;transition:width .45s var(--ease),height .45s var(--ease),margin .45s var(--ease),background .45s,border-color .45s,backdrop-filter .45s}
+.c-label{font-size:10px;font-weight:700;letter-spacing:.18em;color:#000;opacity:0;transition:opacity .3s;white-space:nowrap}
+.cursor.hover .c-ring{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(255,106,0,.12);border-color:var(--or)}
+.cursor.label .c-ring{width:92px;height:92px;margin:-46px 0 0 -46px;background:var(--or);border-color:var(--or)}
+.cursor.label .c-label{opacity:1}
+.cursor.label .c-dot,.cursor.hover .c-dot{opacity:0}
+.cursor.text .c-ring{width:4px;height:34px;margin:-17px 0 0 -2px;border-radius:3px;background:var(--or);border-color:transparent}
+.cursor.down .c-ring{transform:scale(.8)}
 
-/* ---------- progress + side hud ---------- */
-.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;pointer-events:none}
-.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--violet));transform-origin:left;transform:scaleX(0)}
-.side-hud{position:fixed;right:calc(var(--pad) / 2 - 6px);top:50%;z-index:20;transform:translateY(-50%);writing-mode:vertical-rl;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);display:flex;gap:14px;align-items:center;pointer-events:none}
-.side-hud i{width:1px;height:40px;background:var(--line-2);display:block}
-.side-idx{color:var(--cyan)}
+/* ---------- progress & HUD ---------- */
+.progress{position:fixed;left:0;top:0;right:0;height:2px;z-index:120;pointer-events:none}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--or),var(--peach));transform-origin:left;transform:scaleX(0)}
+.side-hud{position:fixed;right:clamp(14px,2vw,28px);top:50%;z-index:40;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:14px;font-size:10px;font-weight:700;letter-spacing:.3em;color:var(--dim);writing-mode:vertical-rl;pointer-events:none}
+.side-hud b{color:var(--or);font-weight:700}
+.side-hud i{width:1px;height:46px;background:var(--line-2)}
 
 /* ---------- nav ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);transition:padding .4s,background .4s,border-color .4s;border-bottom:1px solid transparent}
-.nav.scrolled{padding-top:12px;padding-bottom:12px;background:rgba(4,6,12,.6);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border-color:var(--line)}
-.logo{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.06em;font-size:15px}
-.logo-mark{width:34px;height:34px;position:relative;perspective:200px}
-.logo-cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 9s linear infinite}
-.logo-cube b{position:absolute;inset:0;border:1px solid var(--cyan);background:rgba(34,211,238,.06)}
-.logo-cube b:nth-child(1){transform:translateZ(17px)}
-.logo-cube b:nth-child(2){transform:rotateY(90deg) translateZ(17px)}
-.logo-cube b:nth-child(3){transform:rotateY(180deg) translateZ(17px)}
-.logo-cube b:nth-child(4){transform:rotateY(-90deg) translateZ(17px)}
-.logo-cube b:nth-child(5){transform:rotateX(90deg) translateZ(17px);border-color:var(--blue)}
-.logo-cube b:nth-child(6){transform:rotateX(-90deg) translateZ(17px);border-color:var(--blue)}
-@keyframes spin{from{transform:rotateX(-22deg) rotateY(0)}to{transform:rotateX(-22deg) rotateY(360deg)}}
-.logo span em{font-style:normal;color:var(--cyan)}
-.nav-links{display:flex;gap:36px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--muted)}
-.nav-links a{position:relative;transition:color .3s}
-.nav-links a:hover{color:var(--fg)}
-.nav-links a::before{content:attr(data-idx);color:var(--cyan);margin-right:8px;font-size:10px}
-.nav-cta{font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:11px 18px;border:1px solid var(--line-2);border-radius:100px;display:inline-flex;gap:10px;align-items:center;transition:border-color .3s,background .3s}
-.nav-cta:hover{border-color:var(--cyan);background:rgba(34,211,238,.08)}
-.dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:ping 2s infinite}
-@keyframes ping{70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.nav{position:fixed;top:16px;left:50%;z-index:100;width:min(calc(100% - 28px),1240px);transform:translateX(-50%);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 10px 10px 22px;border-radius:18px;border:1px solid transparent;transition:background .5s,border-color .5s,backdrop-filter .5s,transform .6s var(--ease)}
+.nav.scrolled{background:rgba(10,10,11,.55);border-color:var(--line);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+.nav.hide{transform:translate(-50%,-140%)}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand .emark{width:38px;height:auto;transition:transform .6s var(--ease)}
+.brand:hover .emark{transform:translateX(3px) skewX(-6deg)}
+.brand-sep{width:1px;height:30px;background:var(--line-2)}
+.brand-txt{display:flex;flex-direction:column;line-height:1}
+.brand-txt b{font-size:17px;font-weight:800;letter-spacing:.02em}
+.brand-txt span{font-size:11.5px;font-weight:400;letter-spacing:.06em;color:var(--muted);margin-top:3px}
+.nav-links{display:flex;gap:4px;position:relative}
+.nav-links a{position:relative;padding:10px 16px;font-size:14px;font-weight:500;color:var(--muted);transition:color .3s;border-radius:10px}
+.nav-links a:hover,.nav-links a.active{color:var(--fg)}
+.nav-ind{position:absolute;bottom:2px;height:2px;border-radius:2px;background:var(--or);transition:left .5s var(--ease),width .5s var(--ease),opacity .3s;opacity:0;pointer-events:none}
+.nav-cta{display:inline-flex;align-items:center;gap:10px}
+.burger{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);position:relative}
+.burger i{position:absolute;left:13px;right:13px;height:2px;background:var(--fg);border-radius:2px;transition:transform .5s var(--ease),top .5s var(--ease)}
+.burger i:nth-child(1){top:17px}.burger i:nth-child(2){top:26px}
+.menu-open .burger i:nth-child(1){top:22px;transform:rotate(45deg)}
+.menu-open .burger i:nth-child(2){top:22px;transform:rotate(-45deg)}
+.mmenu{position:fixed;inset:0;z-index:90;background:rgba(5,5,5,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;padding:100px var(--pad) 40px;gap:6px;clip-path:circle(0 at calc(100% - 44px) 40px);transition:clip-path .8s cubic-bezier(.76,0,.24,1);visibility:hidden}
+.menu-open .mmenu{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible}
+.mmenu a{font-size:clamp(34px,10vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.15;display:flex;align-items:baseline;gap:14px}
+.mmenu a small{font-size:12px;font-weight:600;color:var(--or);letter-spacing:.2em}
+.mmenu .btn{margin-top:28px;align-self:flex-start;font-size:15px}
 
-/* ---------- shared ---------- */
+/* ---------- buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border-radius:14px;font-size:15px;font-weight:600;letter-spacing:.01em;overflow:hidden;isolation:isolate;white-space:nowrap;transition:color .4s,border-color .4s,box-shadow .4s}
+.btn svg{width:18px;height:18px;transition:transform .45s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-or{background:var(--or);color:#fff;box-shadow:0 10px 40px -12px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn-or::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-110%);transition:transform .9s var(--ease)}
+.btn-or:hover::before{transform:translateX(110%)}
+.btn-or:hover{box-shadow:0 14px 50px -10px rgba(255,106,0,1),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn-gh{border:1px solid var(--line-2);background:rgba(255,255,255,.03);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-gh::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fg);transform:translateY(101%);transition:transform .55s var(--ease)}
+.btn-gh:hover{color:#000;border-color:var(--fg)}
+.btn-gh:hover::before{transform:none}
+.btn-sm{padding:12px 20px;font-size:14px;border-radius:12px}
+
+/* ---------- common ---------- */
 section{position:relative}
-.wrap{padding:0 var(--pad);max-width:1440px;margin:0 auto}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--cyan);display:flex;gap:12px;align-items:center;text-transform:uppercase}
-.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
-.h2{font-size:clamp(36px,5.6vw,84px);font-weight:500;line-height:1;letter-spacing:-.035em;margin-top:22px;max-width:14ch}
-.h2 .soft{color:var(--dim)}
-.mono{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em}
-
-.btn{position:relative;display:inline-flex;align-items:center;gap:14px;padding:18px 28px;border-radius:100px;font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;overflow:hidden;isolation:isolate;transition:color .4s}
-.btn .arrow{width:18px;height:18px;transition:transform .4s}
-.btn:hover .arrow{transform:translateX(4px) rotate(-45deg)}
-.btn.primary{background:linear-gradient(120deg,var(--blue),#2563eb 50%,var(--cyan));color:#fff;box-shadow:0 10px 40px -10px rgba(59,130,246,.7),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn.primary::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-100%);transition:transform .8s}
-.btn.primary:hover::after{transform:translateX(100%)}
-.btn.ghost{border:1px solid var(--line-2);color:var(--fg);backdrop-filter:blur(8px)}
-.btn.ghost::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fg);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.btn.ghost:hover{color:var(--bg)}
-.btn.ghost:hover::before{transform:translateY(0)}
+.eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--or)}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--or);border-radius:2px}
+.h2{font-size:clamp(38px,6vw,88px);font-weight:800;line-height:1;letter-spacing:-.04em;margin-top:20px}
+.h2 .soft{color:var(--dim);font-weight:700}
+.lead{font-size:clamp(16px,1.35vw,19px);color:var(--muted);max-width:56ch;margin-top:22px;font-weight:400}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 80px -40px rgba(0,0,0,.8)}
+.spot{position:relative;--mx:50%;--my:50%}
+.spot::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,106,0,.14),transparent 45%);opacity:0;transition:opacity .45s}
+.spot::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;padding:1px;background:radial-gradient(320px circle at var(--mx) var(--my),var(--or),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .45s}
+.spot:hover::before,.spot:hover::after{opacity:1}
+.spot>*{position:relative;z-index:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:12px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--muted);background:rgba(255,255,255,.02)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wi{display:inline-block;will-change:transform}
 
 /* ---------- hero ---------- */
-.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:140px 0 120px}
-.hero .wrap{width:100%}
-.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;padding:9px 16px;border:1px solid var(--line-2);border-radius:100px;background:var(--glass);backdrop-filter:blur(10px)}
-.hero-title{margin-top:30px;font-weight:700;letter-spacing:-.045em;line-height:.86;font-size:clamp(56px,11vw,176px)}
-.hero-title .line{display:block;overflow:hidden;perspective:900px;padding:.04em 0 .06em}
-.hero-title .line.small{font-size:.42em;letter-spacing:-.02em;font-weight:400;margin-top:.15em;color:var(--muted)}
-.word{display:inline-block;white-space:nowrap}
-.char{display:inline-block;transform-origin:50% 100%;will-change:transform}
-.grad .char{background:linear-gradient(100deg,var(--blue) 0%,var(--cyan) 55%,var(--violet) 110%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
-@keyframes shine{to{background-position:-300% 0}}
-.hero-sub{margin-top:34px;max-width:46ch;font-size:clamp(16px,1.35vw,19px);color:var(--muted);font-weight:300}
-.hero-sub strong{color:var(--fg);font-weight:500}
-.hero-ctas{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
-.hud{position:absolute;inset:100px var(--pad) 36px;pointer-events:none;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim)}
-.hud-item{position:absolute;display:flex;flex-direction:column;gap:4px}
-.hud-item b{color:var(--muted);font-weight:400}
-.hud-tr{right:0;top:0;text-align:right}
-.hud-bl{left:0;bottom:0}
-.hud-br{right:0;bottom:0;text-align:right}
-.scroll-hint{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--muted)}
-.scroll-hint .bar{width:1px;height:48px;background:var(--line-2);position:relative;overflow:hidden}
-.scroll-hint .bar::after{content:"";position:absolute;left:0;right:0;height:40%;background:var(--cyan);animation:drip 1.8s cubic-bezier(.6,0,.3,1) infinite}
-@keyframes drip{from{top:-40%}to{top:100%}}
+.hero{min-height:100svh;display:flex;align-items:center;padding:140px 0 120px;overflow:hidden}
+.hero .wrap{position:relative}
+.hero-tag{display:inline-flex;align-items:center;gap:16px;font-size:12px;font-weight:700;letter-spacing:.42em;color:var(--fg)}
+.hero-tag::before{content:"";width:46px;height:2px;background:var(--or);border-radius:2px}
+.hero h1{font-size:clamp(46px,8.4vw,128px);font-weight:800;line-height:.98;letter-spacing:-.045em;margin-top:30px;max-width:12ch}
+.hero h1 .or{background:linear-gradient(100deg,var(--or) 20%,var(--or-2) 60%,var(--peach));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin-top:30px;font-size:clamp(16px,1.5vw,21px);color:var(--muted);max-width:46ch}
+.hero-ctas{margin-top:42px;display:flex;flex-wrap:wrap;gap:14px}
+.chips{position:absolute;inset:0;pointer-events:none}
+.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:16px;font-size:13px;font-weight:600;white-space:nowrap}
+.chip .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,106,0,.14);color:var(--or)}
+.chip .ic svg{width:18px;height:18px}
+.chip small{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.02em}
+.chip-1{right:4%;top:2%}
+.chip-2{right:22%;top:44%}
+.chip-3{right:2%;top:70%}
+.live{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.scroll-hint{position:absolute;left:var(--pad);bottom:34px;display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--dim)}
+.scroll-hint .m{width:22px;height:34px;border:1.5px solid var(--line-2);border-radius:12px;position:relative}
+.scroll-hint .m::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--or);animation:wheel 1.8s var(--ease) infinite}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}80%{transform:translateY(10px);opacity:0}100%{opacity:0}}
 
 /* ---------- stats ---------- */
-.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(8,12,23,.4),rgba(8,12,23,.8));backdrop-filter:blur(6px)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:44px 28px;border-left:1px solid var(--line);position:relative;overflow:hidden}
+.stats{padding:0 0 clamp(90px,12vw,150px)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);border-radius:22px;overflow:hidden}
+.stat{padding:34px 30px;border-left:1px solid var(--line)}
 .stat:first-child{border-left:0}
-.stat::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.stat:hover::after{transform:scaleX(1)}
-.stat-num{font-size:clamp(44px,5vw,72px);font-weight:600;letter-spacing:-.04em;line-height:1}
-.stat-num .accent{color:var(--cyan)}
-.stat-label{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.stat-num{font-size:clamp(40px,4.6vw,64px);font-weight:800;letter-spacing:-.04em;line-height:1}
+.stat-num .or{font-weight:800}
+.stat-label{margin-top:12px;font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--dim);text-transform:uppercase}
 
 /* ---------- services ---------- */
-.services{padding:clamp(110px,16vw,200px) 0}
-.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
-.cards{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1400px}
-.card{position:relative;transform-style:preserve-3d}
-.card-inner{position:relative;height:100%;padding:34px 30px 30px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(15,22,42,.78),rgba(6,9,18,.85));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transform-style:preserve-3d;overflow:hidden;--mx:50%;--my:50%}
-.card-inner::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(34,211,238,.16),transparent 45%);opacity:0;transition:opacity .4s}
-.card-inner::after{content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;padding:1px;background:radial-gradient(260px circle at var(--mx) var(--my),var(--cyan),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
-.card:hover .card-inner::before,.card:hover .card-inner::after{opacity:1}
-.card-top{display:flex;justify-content:space-between;align-items:flex-start;transform:translateZ(40px)}
-.card-num{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.14em}
-.card-icon{width:52px;height:52px;border-radius:14px;border:1px solid var(--line-2);display:grid;place-items:center;background:rgba(59,130,246,.08);color:var(--cyan)}
-.card-icon svg{width:24px;height:24px}
-.card h3{margin-top:56px;font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.15;transform:translateZ(30px)}
-.card p{margin-top:14px;color:var(--muted);font-size:15px;font-weight:300;transform:translateZ(18px)}
-.tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:6px;transform:translateZ(24px)}
-.tags span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;padding:5px 9px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
-
-/* ---------- projects ---------- */
-.projects{padding:0 0 clamp(110px,16vw,200px)}
-.projs{margin-top:72px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.proj{display:flex;flex-direction:column;border-radius:20px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(15,22,42,.78),rgba(6,9,18,.85));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;transition:border-color .4s}
-.proj:hover{border-color:var(--line-2)}
-.proj-shot{margin:14px 14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#05070d}
-.proj-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03)}
-.proj-bar i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
-.proj-bar span{margin-left:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.proj-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
-.proj:hover .proj-shot img{transform:scale(1.04)}
-.proj-body{padding:26px 26px 30px}
-.proj-meta{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.proj h3{margin-top:18px;font-size:clamp(24px,2.4vw,32px);font-weight:500;letter-spacing:-.02em;line-height:1.1;display:flex;justify-content:space-between;gap:16px}
-.proj-go{color:var(--cyan);transition:transform .4s}
-.proj:hover .proj-go{transform:translate(3px,-3px)}
-.proj p{margin-top:14px;color:var(--muted);font-size:15px;font-weight:300}
-.proj-wide{grid-column:1/-1}
-.proj-intro p{max-width:72ch}
-.demos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 14px 14px}
-.demo{display:flex;flex-direction:column;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:border-color .4s}
-.demo:hover{border-color:var(--line-2)}
-.demo .proj-shot{margin:10px 10px 0}
-.proj-wide:hover .proj-shot img,.proj-wide:hover .proj-go{transform:none}
-.demo:hover .proj-shot img{transform:scale(1.04)}
-.demo-body{padding:20px 16px 22px}
-.demo h4{margin-top:12px;font-size:clamp(20px,1.8vw,24px);font-weight:500;letter-spacing:-.02em;line-height:1.15;display:flex;justify-content:space-between;gap:16px}
-.demo:hover .proj-go{transform:translate(3px,-3px)}
-.demo p{font-size:14.5px}
-.demo-hint{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim)}
-.demo-hint b{color:var(--cyan);font-weight:500}
+.services{padding:clamp(60px,8vw,110px) 0 clamp(80px,10vw,140px)}
+.svc-list{margin-top:clamp(50px,6vw,80px);display:flex;flex-direction:column;gap:28px}
+.svc{position:sticky;top:calc(110px + var(--i) * 18px)}
+.svc-card{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,4vw,60px);padding:clamp(28px,3.6vw,52px);border-radius:28px;min-height:min(62vh,520px);overflow:hidden;transform-origin:50% 0;background:linear-gradient(135deg,rgba(26,26,28,.78),rgba(10,10,11,.86));will-change:transform}
+.svc-top{display:flex;align-items:center;gap:18px}
+.svc-num{font-size:14px;font-weight:700;color:var(--or);letter-spacing:.2em}
+.svc-line{flex:1;height:1px;background:var(--line-2);max-width:120px}
+.svc h3{margin-top:clamp(26px,4vw,48px);font-size:clamp(30px,3.6vw,52px);font-weight:800;line-height:1.02;letter-spacing:-.035em;max-width:14ch}
+.svc p{margin-top:20px;font-size:clamp(15px,1.2vw,18px);color:var(--muted);max-width:44ch}
+.svc ul{list-style:none;margin-top:26px;display:grid;gap:10px}
+.svc li{display:flex;gap:12px;align-items:center;font-size:15px;font-weight:500}
+.svc li::before{content:"";width:16px;height:2px;background:var(--or);border-radius:2px;flex-shrink:0}
+.svc .tags{margin-top:28px}
+.svc-vis{position:relative;border-radius:22px;border:1px solid var(--line);background:radial-gradient(120% 90% at 80% 100%,rgba(255,106,0,.32),transparent 55%),radial-gradient(80% 60% at 0% 0%,rgba(255,255,255,.05),transparent 60%),#0a0a0b;display:grid;place-items:center;overflow:hidden;min-height:240px}
+.svc-vis::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(circle at 50% 50%,#000,transparent 75%);-webkit-mask-image:radial-gradient(circle at 50% 50%,#000,transparent 75%)}
+.svc-vis .big{position:absolute;right:-4%;bottom:-18%;font-size:clamp(160px,20vw,300px);font-weight:900;line-height:1;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px rgba(255,106,0,.35)}
+.svc-ic{position:relative;width:clamp(96px,10vw,132px);height:clamp(96px,10vw,132px);border-radius:30px;display:grid;place-items:center;color:var(--or);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid var(--line-2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 30px 60px -20px rgba(255,106,0,.45),inset 0 1px 0 rgba(255,255,255,.12)}
+.svc-ic svg{width:46%;height:46%}
+.svc-orbit{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;border:1px dashed rgba(255,106,0,.28);animation:spin 26s linear infinite}
+.svc-orbit::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--or);box-shadow:0 0 18px var(--or)}
+.svc-orbit.o2{width:86%;animation-duration:40s;animation-direction:reverse;border-style:solid;border-color:var(--line)}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ---------- marquee ---------- */
-.stack{padding:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:rgba(4,6,12,.7)}
+.marquee{padding:34px 0;border-block:1px solid var(--line);overflow:hidden;background:rgba(5,5,5,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .mq-row{display:flex;white-space:nowrap;will-change:transform}
-.mq-row+.mq-row{margin-top:10px}
-.mq-row span{font-size:clamp(32px,5vw,72px);font-weight:600;letter-spacing:-.03em;padding:0 .35em;display:inline-flex;align-items:center;gap:.7em}
-.mq-row span::after{content:"";width:.22em;height:.22em;border-radius:50%;background:var(--cyan);display:inline-block;margin-left:.35em}
-.mq-row.outline span{color:transparent;-webkit-text-stroke:1px var(--line-2)}
-.mq-row.outline span::after{background:var(--violet)}
+.mq-row+.mq-row{margin-top:12px}
+.mq-in{display:flex;flex-shrink:0}
+.mq-row span{font-size:clamp(34px,5.4vw,76px);font-weight:800;letter-spacing:-.035em;padding:0 .4em;display:inline-flex;align-items:center;gap:.8em;line-height:1.05}
+.mq-row span::after{content:"";width:.32em;height:.32em;background:var(--or);transform:skewX(-20deg);border-radius:2px}
+.mq-row.outline span{color:transparent;-webkit-text-stroke:1.5px rgba(247,244,241,.35)}
+.mq-row.outline span::after{background:transparent;border:1.5px solid rgba(255,106,0,.6)}
 
-/* ---------- journey ---------- */
-.journey{height:100vh;height:100svh;overflow:hidden}
-.j-rail{position:absolute;left:var(--pad);right:var(--pad);top:clamp(96px,14vh,140px);height:1px;background:var(--line-2);z-index:2}
-.j-rail span{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transform-origin:left;transform:scaleX(0)}
-.j-track{display:flex;height:100%;width:max-content;will-change:transform}
-.j-panel{width:min(78vw,820px);height:100%;flex:none;padding:clamp(150px,22vh,220px) var(--pad) 60px;display:flex;flex-direction:column;justify-content:center;position:relative}
-.j-panel.intro{width:min(90vw,760px)}
-.j-panel + .j-panel:not(.intro)::before{content:"";position:absolute;left:var(--pad);top:clamp(96px,14vh,140px);width:11px;height:11px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--bg);border:1px solid var(--cyan);box-shadow:0 0 18px var(--cyan)}
-.j-year{font-size:clamp(110px,17vw,260px);font-weight:700;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.2px rgba(140,180,255,.45);position:relative}
-.j-year::after{content:attr(data-y);position:absolute;inset:0;color:var(--fg);-webkit-text-stroke:0;clip-path:inset(0 100% 0 0);background:linear-gradient(100deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;transition:clip-path 1.2s cubic-bezier(.2,.8,.2,1)}
-.j-panel.active .j-year::after{clip-path:inset(0 0 0 0)}
-.j-panel h3{margin-top:30px;font-size:clamp(26px,2.6vw,38px);font-weight:500;letter-spacing:-.02em}
-.j-panel p{margin-top:14px;max-width:44ch;color:var(--muted);font-weight:300;font-size:17px}
-.j-panel .mono{margin-top:22px;display:block}
-.j-end{width:30vw;flex:none}
+/* ---------- projects ---------- */
+.projects{padding:clamp(100px,13vw,180px) 0}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.filters button{padding:10px 20px;border-radius:999px;border:1px solid var(--line-2);background:rgba(255,255,255,.03);font-size:14px;font-weight:600;color:var(--muted);transition:background .35s,color .35s,border-color .35s}
+.filters button:hover{color:var(--fg);border-color:rgba(255,255,255,.3)}
+.filters button.on{background:var(--or);border-color:var(--or);color:#fff}
+.bento{margin-top:40px;display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.pcard{border-radius:26px;overflow:hidden;transition:filter .6s var(--ease)}
+.pcard.off{filter:grayscale(1) brightness(.3) blur(1.5px)}
+.p-feat{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.25fr;min-height:460px}
+.p-feat .p-body{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+.p-kicker{display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:700;letter-spacing:.22em;color:var(--or);text-transform:uppercase}
+.p-kicker i{width:6px;height:6px;border-radius:50%;background:var(--or)}
+.pcard h3.p-logo{margin-top:22px;font-size:clamp(44px,5.4vw,72px);font-weight:800;font-style:italic;letter-spacing:-.04em;line-height:1}
+.pcard h3{font-size:clamp(26px,2.6vw,36px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.pcard p{margin-top:14px;color:var(--muted);font-size:15.5px;max-width:52ch}
+.p-feat p{font-size:clamp(15.5px,1.3vw,18px);margin-top:20px}
+.p-feat .tags{margin-top:24px}
+.p-feat .btn{margin-top:32px;align-self:flex-start}
+.p-media{position:relative;overflow:hidden;min-height:280px}
+.p-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform 1.4s var(--ease)}
+.p-feat .p-media{margin:14px 14px 14px 0;border-radius:18px;border:1px solid var(--line)}
+.p-feat .p-media img{top:-5%;height:110%}
+.p-feat .p-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.55),transparent 30%),linear-gradient(0deg,rgba(5,5,5,.4),transparent 40%)}
+.pcard:hover .p-media img,.demo:hover .p-media img{transform:scale(1.05)}
+.p-sched{grid-column:span 8;padding:clamp(24px,3vw,36px)}
+.p-cat{grid-column:span 4;display:flex;flex-direction:column}
+.p-cat .p-media{margin:14px 14px 0;border-radius:18px;border:1px solid var(--line);aspect-ratio:16/11;min-height:0}
+.p-cat .p-body{padding:26px 28px 30px;display:flex;flex-direction:column;flex:1}
+.p-cat .tags{margin-top:20px}
+.p-link{margin-top:auto;padding-top:24px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--or)}
+.p-link svg{width:16px;height:16px;transition:transform .45s var(--ease)}
+.pcard:hover .p-link svg,.demo:hover .p-link svg{transform:translate(3px,-3px)}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.p-sched>p{max-width:64ch}
+.demos{margin-top:26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.demo{display:flex;flex-direction:column;border-radius:18px;border:1px solid var(--line);background:rgba(0,0,0,.25);overflow:hidden;transition:border-color .4s}
+.demo:hover{border-color:rgba(255,106,0,.5)}
+.demo .p-media{aspect-ratio:16/10;min-height:0;border-bottom:1px solid var(--line);display:flex;flex-direction:column}
+.demo .p-media img{position:static;flex:1;min-height:0;height:auto}
+.demo-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1}
+.demo-k{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--dim)}
+.demo h4{margin-top:8px;font-size:20px;font-weight:700;letter-spacing:-.02em}
+.demo p{margin-top:8px;font-size:14px}
+.demo-hint{margin-top:14px;font-size:12px;color:var(--dim)}
+.demo-hint b{color:var(--peach);font-weight:700}
+.demo .p-link{padding-top:16px}
+.bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);position:relative;z-index:1}
+.bar i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
+.bar span{margin-left:8px;font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* ---------- cta ---------- */
-.cta{padding:clamp(130px,18vw,240px) 0 clamp(90px,12vw,150px);text-align:center}
-.cta-title{font-size:clamp(52px,10vw,170px);font-weight:600;letter-spacing:-.05em;line-height:.9}
-.cta-title .grad-t{background:linear-gradient(100deg,var(--blue),var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
-.cta p{margin:28px auto 0;max-width:48ch;color:var(--muted);font-size:18px;font-weight:300}
-.cta .hero-ctas{justify-content:center}
-.contact-strip{margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--glass);backdrop-filter:blur(12px);text-align:left}
-.contact-strip a{padding:28px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:8px;transition:background .3s}
-.contact-strip a:first-child{border-left:0}
-.contact-strip a:hover{background:rgba(34,211,238,.06)}
-.contact-strip .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--cyan)}
-.contact-strip .v{font-size:17px;word-break:break-all}
+/* ---------- about ---------- */
+.about{padding:clamp(80px,10vw,140px) 0}
+.manifesto{font-size:clamp(28px,4vw,58px);font-weight:700;line-height:1.14;letter-spacing:-.03em;max-width:22ch;margin-top:26px}
+.manifesto .mw{opacity:.14;transition:opacity .2s}
+.manifesto .mw.or{color:var(--or)}
+.no-anim .manifesto .mw{opacity:1}
+.pillars{margin-top:clamp(56px,7vw,90px);display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pillar{padding:34px 30px;border-radius:24px}
+.pillar .pi{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;color:var(--or);background:rgba(255,106,0,.1);border:1px solid rgba(255,106,0,.25)}
+.pillar .pi svg{width:28px;height:28px}
+.pillar h3{margin-top:26px;font-size:15px;font-weight:800;letter-spacing:.22em}
+.pillar p{margin-top:10px;color:var(--muted);font-size:15.5px}
+.story{margin-top:clamp(80px,10vw,140px);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,6vw,90px);align-items:start}
+.story-l{position:sticky;top:120px}
+.founder{margin-top:34px;padding:26px;border-radius:22px;display:flex;flex-direction:column;gap:18px}
+.f-id{display:flex;align-items:center;gap:16px}
+.f-av{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff;background:linear-gradient(135deg,var(--or),#c24d00);box-shadow:0 14px 30px -10px rgba(255,106,0,.7)}
+.f-id b{display:block;font-size:17px;font-weight:700}
+.f-id span{font-size:13.5px;color:var(--muted)}
+.f-links{display:flex;flex-wrap:wrap;gap:10px}
+.tl{position:relative;padding-left:40px}
+.tl-line{position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--line-2);border-radius:2px;overflow:hidden}
+.tl-line i{position:absolute;inset:0;background:linear-gradient(var(--or),var(--peach));transform-origin:top;transform:scaleY(0)}
+.no-anim .tl-line i{transform:none}
+.tl-item{position:relative;padding:0 0 clamp(40px,5vw,64px)}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-38px;top:10px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--or);box-shadow:0 0 0 6px rgba(255,106,0,.12)}
+.tl-year{font-size:clamp(44px,5vw,72px);font-weight:900;letter-spacing:-.05em;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(247,244,241,.3)}
+.tl-item h3{margin-top:12px;font-size:clamp(20px,1.8vw,26px);font-weight:700;letter-spacing:-.02em}
+.tl-item p{margin-top:8px;color:var(--muted);max-width:52ch}
+.tl-meta{margin-top:12px;font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.tl-item.now .tl-year{color:var(--or);-webkit-text-stroke:0}
+
+/* ---------- contact ---------- */
+.contact{padding:clamp(90px,12vw,160px) 0 clamp(80px,10vw,120px)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(30px,5vw,80px);align-items:start}
+.contact h2{font-size:clamp(40px,5.6vw,80px);font-weight:800;line-height:1;letter-spacing:-.04em;margin-top:22px}
+.c-list{margin-top:40px;display:grid;gap:14px}
+.c-item{display:flex;align-items:center;gap:18px;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02);transition:border-color .4s,background .4s}
+a.c-item:hover{border-color:rgba(255,106,0,.5);background:rgba(255,106,0,.05)}
+.c-ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;color:var(--or);border:1px solid rgba(255,106,0,.35);background:rgba(255,106,0,.08)}
+.c-ic svg{width:22px;height:22px}
+.c-item b{display:block;font-size:15px;font-weight:700}
+.c-item span{font-size:14.5px;color:var(--muted);word-break:break-word}
+.socials{margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.socials b{font-size:15px;font-weight:700}
+.socials div{margin-top:14px;display:flex;gap:10px}
+.socials a{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;border:1px solid var(--line-2);transition:background .35s,border-color .35s,color .35s}
+.socials a:hover{background:var(--or);border-color:var(--or);color:#fff}
+.socials svg{width:20px;height:20px}
+.form{padding:clamp(26px,3.4vw,44px);border-radius:28px}
+.form h3{font-size:clamp(26px,2.4vw,34px);font-weight:800;letter-spacing:-.03em}
+.form>p{margin-top:6px;color:var(--muted);font-size:15px}
+.f-grid{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:14px;font-weight:600}
+.field label em{color:var(--or);font-style:normal}
+.field input,.field textarea{width:100%;padding:15px 16px;border-radius:12px;border:1px solid var(--line-2);background:rgba(0,0,0,.35);font-size:15px;outline:none;transition:border-color .3s,box-shadow .3s,background .3s}
+.field textarea{min-height:130px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:rgba(247,244,241,.32)}
+.field input:focus,.field textarea:focus{border-color:var(--or);box-shadow:0 0 0 4px rgba(255,106,0,.16);background:rgba(0,0,0,.5)}
+.field.err input,.field.err textarea{border-color:#ef4444}
+.form .btn{width:100%;justify-content:center;margin-top:24px;padding:18px}
+.f-note{margin-top:14px;font-size:12.5px;color:var(--dim);text-align:center}
 
 /* ---------- footer ---------- */
-footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0 36px}
-.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
-.f-grid h4{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:400;margin-bottom:16px}
-.f-grid p{color:var(--muted);font-weight:300;max-width:40ch;margin-top:16px}
-.f-grid ul{list-style:none;display:flex;flex-direction:column;gap:10px}
-.f-grid ul a{transition:color .3s}
-.f-grid ul a:hover{color:var(--cyan)}
-.f-big{margin-top:64px;font-size:clamp(64px,17vw,270px);font-weight:700;letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--line-2);white-space:nowrap;user-select:none}
-.f-bottom{margin-top:36px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--dim)}
+footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;overflow:hidden;background:linear-gradient(180deg,rgba(5,5,5,.4),#050505 60%)}
+.ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.ft p{margin-top:18px;color:var(--muted);font-size:14.5px;max-width:36ch}
+.ft h4{font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--dim)}
+.ft ul{list-style:none;margin-top:16px;display:grid;gap:10px}
+.ft ul a{font-size:14.5px;color:var(--muted);transition:color .3s}
+.ft ul a:hover{color:var(--or)}
+.f-big{margin-top:70px;font-size:clamp(70px,18.5vw,300px);font-weight:900;letter-spacing:-.06em;line-height:.8;white-space:nowrap;user-select:none;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.12);background:linear-gradient(90deg,var(--or),var(--or-2),var(--peach)) 0 0/0% 100% no-repeat;-webkit-background-clip:text;background-clip:text;transition:background-size 1.6s var(--ease),-webkit-text-stroke-color 1.2s .5s}
+.f-big.lit{background-size:100% 100%;-webkit-text-stroke-color:transparent}
+.f-bottom{margin-top:34px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);letter-spacing:.04em}
 
 /* ---------- responsive ---------- */
-@media (max-width:1000px){
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1100px){
+  .nav-links a{padding:10px 11px}
+  .chip-2{display:none}
+}
+@media (max-width:980px){
+  .nav-links,.nav .nav-cta{display:none}
+  .burger{display:block}
+  .chips{display:none}
+  .svc-card{grid-template-columns:1fr;min-height:0}
+  .svc-vis{min-height:200px;order:-1}
+  .p-feat{grid-template-columns:1fr}
+  .p-feat .p-media{margin:0 14px 14px;order:2;aspect-ratio:16/10}
+  .p-sched,.p-cat{grid-column:1/-1}
+  .story{grid-template-columns:1fr}
+  .story-l{position:static}
+  .contact-grid{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr 1fr}
+  .side-hud{display:none}
+}
+@media (max-width:700px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat{padding:26px 20px}
   .stat:nth-child(3){border-left:0}
   .stat:nth-child(n+3){border-top:1px solid var(--line)}
-}
-@media (max-width:900px){
-  .journey{height:auto;overflow:visible;padding:110px 0 40px}
-  .j-rail{display:none}
-  .j-track{flex-direction:column;width:auto}
-  .j-panel,.j-panel.intro{width:auto;height:auto;padding:40px var(--pad)}
-  .j-panel + .j-panel:not(.intro)::before{display:none}
-  .j-panel:not(.intro){border-left:1px solid var(--line-2);margin-left:var(--pad);padding-left:24px}
-  .j-end{display:none}
-}
-@media (max-width:760px){
-  .nav-links{display:none}
-  .nav-cta{padding:9px 14px;font-size:11px}
-  .cards{grid-template-columns:1fr}
-  .projs{grid-template-columns:1fr}
-  .demos{grid-template-columns:minmax(0,1fr);padding:0 10px 10px}
-  .proj-body{padding:22px 20px 26px}
-  .hud-tr,.side-hud{display:none}
-  .hud-bl,.hud-br{display:none}
-  .scroll-hint{bottom:20px}
-  .contact-strip{grid-template-columns:1fr}
-  .contact-strip a{border-left:0;border-top:1px solid var(--line)}
-  .contact-strip a:first-child{border-top:0}
+  .pillars{grid-template-columns:1fr}
+  .demos{grid-template-columns:minmax(0,1fr)}
   .f-grid{grid-template-columns:1fr}
-  .btn{padding:16px 22px;font-size:12px}
-  .stat{padding:30px 18px}
+  .ft{grid-template-columns:1fr}
+  .svc{top:calc(90px + var(--i) * 10px)}
+  .hero{padding:120px 0 110px}
+  .hero-ctas .btn{flex:1 1 auto;justify-content:center}
+  .brand-txt span{display:none}
+  .hero-tag{letter-spacing:.24em;font-size:11px;gap:12px}
+  .hero-tag::before{width:30px}
+  .c-item{gap:14px;padding:14px}
+  .c-item span{font-size:13px}
+  .nav{padding:8px 8px 8px 16px}
 }
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .manifesto .mw{opacity:1}
+  .tl-line i{transform:none}
 }
 </style>
 </head>
-<body class="loading">
-
-<canvas id="gl" aria-hidden="true"></canvas>
-<div class="bg-grid" aria-hidden="true"></div>
-<div class="vignette" aria-hidden="true"></div>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A2B"/><stop offset="1" stop-color="#FF5A00"/></linearGradient>
+  </defs>
+  <symbol id="emark" viewBox="0 0 140 90">
+    <g fill="url(#eg)" transform="translate(36 0) skewX(-22)">
+      <rect x="0" y="0" width="100" height="20" rx="2"/>
+      <rect x="0" y="35" width="74" height="20" rx="2"/>
+      <rect x="0" y="70" width="100" height="20" rx="2"/>
+      <rect x="0" y="0" width="22" height="90" rx="2"/>
+    </g>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
 
 <div class="loader" aria-hidden="true">
-  <div class="loader-top"><span>SBC.DEV</span><span>// INICIALIZANDO SISTEMA</span></div>
-  <div>
-    <div class="loader-count">000</div>
-    <div class="loader-bar"><span></span></div>
+  <div class="loader-in">
+    <svg class="emark" viewBox="0 0 140 90"><g fill="url(#eg)" transform="translate(36 0) skewX(-22)"><rect x="0" y="0" width="100" height="20" rx="2"/><rect x="0" y="35" width="74" height="20" rx="2"/><rect x="0" y="70" width="100" height="20" rx="2"/><rect x="0" y="0" width="22" height="90" rx="2"/></g></svg>
+    <div class="loader-bar"><i></i></div>
+    <div class="loader-meta"><span>EMERICH TECH SOLUTION</span><span class="loader-num">0</span></div>
   </div>
-  <div class="loader-bot"><span>BUILD_VERSION_2.0.0</span><span>SÃO BERNARDO DO CAMPO — BR</span></div>
 </div>
 
-<div id="cursor" aria-hidden="true"><div class="c-dot"></div><div class="c-ring"><span class="c-label"></span></div></div>
-<div class="progress" aria-hidden="true"><span></span></div>
-<div class="side-hud" aria-hidden="true"><span class="side-idx">01</span><i></i><span class="side-name" data-scramble>INÍCIO</span></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><div class="c-ring"><span class="c-label"></span></div><div class="c-dot"></div></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+<div class="side-hud" aria-hidden="true"><b class="hud-idx">01</b><i></i><span class="hud-name">INÍCIO</span></div>
 
 <header class="nav">
-  <a href="#top" class="logo" aria-label="SBC Dev — início">
-    <div class="logo-mark"><div class="logo-cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div>
-    <span>SBC<em>.</em>DEV</span>
+  <a href="#inicio" class="brand" aria-label="EMERICH Tech Solution — início">
+    <svg class="emark" viewBox="0 0 140 90" aria-hidden="true"><use href="#emark"/></svg>
+    <span class="brand-sep" aria-hidden="true"></span>
+    <span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span>
   </a>
   <nav class="nav-links" aria-label="Principal">
-    <a href="#servicos" data-idx="01" data-hover-scramble>SERVIÇOS</a>
-    <a href="#projetos" data-idx="02" data-hover-scramble>PROJETOS</a>
-    <a href="#experiencia" data-idx="03" data-hover-scramble>TRAJETÓRIA</a>
-    <a href="#contato" data-idx="04" data-hover-scramble>CONTATO</a>
-    <a href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener" data-idx="05" data-hover-scramble>CURRÍCULO</a>
+    <a href="#inicio">Início</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contato">Contato</a>
+    <span class="nav-ind" aria-hidden="true"></span>
   </nav>
-  <a class="nav-cta magnetic" href="https://wa.me/5511994480107?text=Ol%C3%A1!%20Vi%20seu%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><span class="dot"></span>DISPONÍVEL</a>
+  <a class="btn btn-or btn-sm nav-cta magnetic" href="#contato"><span>Solicitar orçamento</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
 </header>
+<nav class="mmenu" id="mmenu" aria-label="Menu">
+  <a href="#inicio"><small>01</small>Início</a>
+  <a href="#servicos"><small>02</small>Serviços</a>
+  <a href="#projetos"><small>03</small>Projetos</a>
+  <a href="#sobre"><small>04</small>Sobre</a>
+  <a href="#contato"><small>05</small>Contato</a>
+  <a class="btn btn-or" href="#contato"><span>Solicitar orçamento</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</nav>
 
 <main>
   <!-- HERO -->
-  <section class="hero" id="top" data-section="INÍCIO">
-    <div class="hud" aria-hidden="true">
-      <div class="hud-item hud-tr"><span>SYS.STATUS</span><b>● ONLINE — 2026</b></div>
-      <div class="hud-item hud-bl"><span>LAT −23.6914 / LON −46.5646</span><b>SÃO BERNARDO DO CAMPO, SP</b></div>
-      <div class="hud-item hud-br"><span>CURSOR</span><b class="hud-cursor">X 0000 · Y 0000</b></div>
-    </div>
+  <section class="hero" id="inicio" data-section="INÍCIO">
     <div class="wrap">
-      <div class="tag"><span class="dot"></span>DESENVOLVEDOR FULL STACK • PLENO</div>
+      <div class="chips" aria-hidden="true">
+        <div class="chip glass chip-1" data-depth="1.4"><span class="live"></span><div>Disponível para novos projetos<small>Resposta em até 24h</small></div></div>
+        <div class="chip glass chip-2" data-depth="2.4"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span><div>Automações &amp; integrações<small>APIs · ERP · pagamentos</small></div></div>
+        <div class="chip glass chip-3" data-depth="1.8"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><div>Sistemas sob medida<small>Web · desktop · mobile</small></div></div>
+      </div>
+      <div class="hero-tag">TECNOLOGIA PARA EMPRESAS</div>
       <h1 class="hero-title">
-        <span class="line"><span class="split">CÓDIGO</span></span>
-        <span class="line"><span class="split grad">SÓLIDO</span></span>
-        <span class="line small"><span class="split">Jovem. Experiente.</span></span>
+        <span class="w"><span class="wi">Soluções</span></span> <span class="w"><span class="wi">tecnológicas</span></span>
+        <span class="w"><span class="wi">para</span></span> <span class="w"><span class="wi">o</span></span> <span class="w"><span class="wi">seu</span></span> <span class="w"><span class="wi or">negócio.</span></span>
       </h1>
-      <p class="hero-sub">Desenvolvedor de software com <strong>5 anos de experiência prática</strong> e graduando em Engenharia de Software. Do planejamento ao deploy, transformo complexidade técnica em produtos digitais de alto desempenho.</p>
+      <p class="hero-sub">Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados.</p>
       <div class="hero-ctas">
-        <a class="btn primary magnetic" data-cursor="WHATS" href="https://wa.me/5511994480107?text=Ol%C3%A1!%20Vi%20seu%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">
-          <span>Solicitar orçamento</span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn ghost magnetic" data-cursor="ABRIR" href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener"><span>Ver currículo</span></a>
+        <a class="btn btn-or magnetic" href="#servicos"><span>Conheça nossos serviços</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-gh magnetic" href="#projetos"><span>Ver projetos</span></a>
       </div>
     </div>
-    <div class="scroll-hint" aria-hidden="true">SCROLL<span class="bar"></span></div>
+    <div class="scroll-hint" aria-hidden="true"><span class="m"></span>ROLE PARA EXPLORAR</div>
   </section>
 
   <!-- STATS -->
   <section class="stats" aria-label="Números">
-    <div class="wrap stats-grid">
-      <div class="stat"><div class="stat-num"><span class="accent">+</span><span data-count="10">0</span></div><div class="stat-label">PROJETOS ENTREGUES</div></div>
-      <div class="stat"><div class="stat-num"><span class="accent">+</span><span data-count="5">0</span></div><div class="stat-label">ANOS DE CÓDIGO</div></div>
-      <div class="stat"><div class="stat-num">Full</div><div class="stat-label">STACK &amp; MOBILE</div></div>
-      <div class="stat"><div class="stat-num">Clean<span class="accent">.</span></div><div class="stat-label">ARQUITETURA LIMPA</div></div>
+    <div class="wrap">
+      <div class="stats-grid glass">
+        <div class="stat"><div class="stat-num"><span class="or">+</span><span data-count="10">10</span></div><div class="stat-label">Projetos entregues</div></div>
+        <div class="stat"><div class="stat-num"><span class="or">+</span><span data-count="5">5</span></div><div class="stat-label">Anos de código</div></div>
+        <div class="stat"><div class="stat-num">Full<span class="or">.</span></div><div class="stat-label">Stack &amp; mobile</div></div>
+        <div class="stat"><div class="stat-num"><span data-count="100">100</span><span class="or">%</span></div><div class="stat-label">Sob medida</div></div>
+      </div>
     </div>
   </section>
 
@@ -363,660 +479,644 @@ footer{border-top:1px solid var(--line);background:rgba(3,4,9,.9);padding:64px 0
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <div class="eyebrow reveal" data-scramble>Especialidades</div>
-          <h2 class="h2 reveal">O que a SBC Dev oferece <span class="soft">ao seu negócio.</span></h2>
+          <div class="eyebrow rv">O que fazemos</div>
+          <h2 class="h2 rv">Nossos serviços</h2>
+          <p class="lead rv">Soluções completas em tecnologia para otimizar processos, conectar operações e impulsionar o seu negócio.</p>
         </div>
-        <span class="mono reveal">/ expertise_catalog_2026</span>
       </div>
 
-      <div class="cards">
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">01</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span></div>
-            <h3>Desenvolvimento Full Stack</h3>
-            <p>Ciclo completo do projeto — concepção, implementação e manutenção — com interfaces em Angular e serviços e APIs em Node.js.</p>
-            <div class="tags"><span>Angular</span><span>Node.js</span><span>TypeScript</span><span>REST</span></div>
+      <div class="svc-list">
+        <article class="svc" style="--i:0">
+          <div class="svc-card glass spot">
+            <div>
+              <div class="svc-top"><span class="svc-num">01</span><span class="svc-line"></span></div>
+              <h3>Desenvolvimento e manutenção de sistemas</h3>
+              <p>Criação de sistemas e aplicativos sob medida, além de melhorias em soluções já existentes.</p>
+              <ul><li>Web, desktop e mobile</li><li>Publicação na Google Play e na App Store</li><li>Evolução e modernização de sistemas legados</li></ul>
+              <div class="tags"><span>Angular</span><span>React</span><span>Node.js</span><span>TypeScript</span><span>Delphi</span><span>Flutter</span></div>
+            </div>
+            <div class="svc-vis"><span class="big" aria-hidden="true">01</span><span class="svc-orbit o2"></span><span class="svc-orbit"></span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/><path d="m10 8-2 2 2 2M14 8l2 2-2 2"/></svg></span></div>
           </div>
         </article>
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">02</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></span></div>
-            <h3>Sistemas Multiplataforma</h3>
-            <p>Aplicativos e sistemas cross-platform com Delphi/Pascal, incluindo publicação e atualização na Google Play e na App Store.</p>
-            <div class="tags"><span>Delphi</span><span>Pascal</span><span>Play Store</span><span>App Store</span><span>Flutter</span></div>
+        <article class="svc" style="--i:1">
+          <div class="svc-card glass spot">
+            <div>
+              <div class="svc-top"><span class="svc-num">02</span><span class="svc-line"></span></div>
+              <h3>Automações e integrações</h3>
+              <p>Automação de tarefas e conexão entre sistemas, plataformas e dispositivos.</p>
+              <ul><li>APIs REST e integrações com ERP</li><li>Rotinas automáticas que eliminam retrabalho</li><li>Pagamentos com Pix e cartão integrados</li></ul>
+              <div class="tags"><span>APIs REST</span><span>Webhooks</span><span>Protheus</span><span>ADVPL</span><span>Python</span></div>
+            </div>
+            <div class="svc-vis"><span class="big" aria-hidden="true">02</span><span class="svc-orbit o2"></span><span class="svc-orbit"></span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span></div>
           </div>
         </article>
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">03</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6M4.5 11.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg></span></div>
-            <h3>Banco de Dados &amp; Integrações</h3>
-            <p>Modelagem, otimização e administração de bancos, além de integrações entre sistemas e APIs de terceiros.</p>
-            <div class="tags"><span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span><span>APIs</span></div>
+        <article class="svc" style="--i:2">
+          <div class="svc-card glass spot">
+            <div>
+              <div class="svc-top"><span class="svc-num">03</span><span class="svc-line"></span></div>
+              <h3>Controle de acesso e identificação</h3>
+              <p>Soluções com biometria, reconhecimento facial, TAGs, cartões e QR Codes.</p>
+              <ul><li>Cadastro e validação de pessoas</li><li>Leitura de TAGs, cartões e QR Codes</li><li>Integração com os sistemas da empresa</li></ul>
+              <div class="tags"><span>Biometria</span><span>Facial</span><span>RFID</span><span>QR Code</span></div>
+            </div>
+            <div class="svc-vis"><span class="big" aria-hidden="true">03</span><span class="svc-orbit o2"></span><span class="svc-orbit"></span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><circle cx="12" cy="10" r="3"/><path d="M7 17.5c1.2-1.8 3-2.7 5-2.7s3.8.9 5 2.7"/></svg></span></div>
           </div>
         </article>
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">04</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 11a8 8 0 0 0-14.6-4.5M4 4v4h4M4 13a8 8 0 0 0 14.6 4.5M20 20v-4h-4"/></svg></span></div>
-            <h3>Modernização de Sistemas</h3>
-            <p>Manutenção evolutiva, refatoração e correção de sistemas legados, incluindo soluções TOTVS Protheus.</p>
-            <div class="tags"><span>Refactoring</span><span>Legado</span><span>ADVPL</span><span>Protheus</span></div>
+        <article class="svc" style="--i:3">
+          <div class="svc-card glass spot">
+            <div>
+              <div class="svc-top"><span class="svc-num">04</span><span class="svc-line"></span></div>
+              <h3>Sistemas de gestão e operação</h3>
+              <p>Soluções para agendamentos, compras, vendas e acompanhamento de operações do dia a dia.</p>
+              <ul><li>Agendamento online e controle de agenda</li><li>Painéis, indicadores e relatórios em PDF e Excel</li><li>Pagamento antecipado e controle financeiro</li></ul>
+              <div class="tags"><span>Agendamento</span><span>Dashboards</span><span>SQL Server</span><span>PostgreSQL</span></div>
+            </div>
+            <div class="svc-vis"><span class="big" aria-hidden="true">04</span><span class="svc-orbit o2"></span><span class="svc-orbit"></span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></svg></span></div>
           </div>
         </article>
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">05</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M6 8.5v7M8.5 6H14a4 4 0 0 1 4 4v5.5"/></svg></span></div>
-            <h3>Metodologias Ágeis</h3>
-            <p>Trabalho integrado ao time do cliente com ritos ágeis e foco total em qualidade e pontualidade.</p>
-            <div class="tags"><span>Ritos ágeis</span><span>Git</span><span>GitHub</span><span>Cursor</span></div>
-          </div>
-        </article>
-        <article class="card" data-cursor="↗">
-          <div class="card-inner">
-            <div class="card-top"><span class="card-num">06</span><span class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20h18M6 16V10M11 16V5M16 16v-8M21 16v-4"/></svg></span></div>
-            <h3>Consultoria Técnica</h3>
-            <p>Análise de arquitetura, diagnóstico de performance e orientação estratégica para escolher a stack certa.</p>
-            <div class="tags"><span>Arquitetura</span><span>Performance</span><span>Stack</span></div>
+        <article class="svc" style="--i:4">
+          <div class="svc-card glass spot">
+            <div>
+              <div class="svc-top"><span class="svc-num">05</span><span class="svc-line"></span></div>
+              <h3>Sites e páginas digitais</h3>
+              <p>Desenvolvimento de sites institucionais e landing pages para apresentar empresas, serviços e soluções.</p>
+              <ul><li>Landing pages que convertem</li><li>Sites institucionais rápidos e responsivos</li><li>SEO, performance e animações sob medida</li></ul>
+              <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>WebGL</span><span>SEO</span></div>
+            </div>
+            <div class="svc-vis"><span class="big" aria-hidden="true">05</span><span class="svc-orbit o2"></span><span class="svc-orbit"></span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg></span></div>
           </div>
         </article>
       </div>
     </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee" aria-label="Tecnologias">
+    <div class="mq-row" data-dir="-1"><div class="mq-in"><span>Angular</span><span>React</span><span>Node.js</span><span>TypeScript</span><span>Delphi</span><span>Flutter</span><span>Python</span></div></div>
+    <div class="mq-row outline" data-dir="1"><div class="mq-in"><span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span><span>Protheus</span><span>ADVPL</span><span>Java</span><span>Git</span></div></div>
   </section>
 
   <!-- PROJECTS -->
   <section class="projects" id="projetos" data-section="PROJETOS">
     <div class="wrap">
-      <div class="sec-head">
-        <div>
-          <div class="eyebrow reveal" data-scramble>Projetos</div>
-          <h2 class="h2 reveal">Trabalhos no ar, <span class="soft">em uso de verdade.</span></h2>
-        </div>
-        <span class="mono reveal">/ selected_work_2026</span>
+      <div class="eyebrow rv">Portfólio</div>
+      <h2 class="h2 rv">Projetos desenvolvidos</h2>
+      <p class="lead rv">Conheça soluções reais criadas pela EMERICH para diferentes necessidades empresariais.</p>
+      <div class="filters rv" role="group" aria-label="Filtrar projetos">
+        <button type="button" class="on" data-f="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-f="agendamento" aria-pressed="false">Agendamento</button>
+        <button type="button" data-f="gestao" aria-pressed="false">Gestão</button>
+        <button type="button" data-f="sites" aria-pressed="false">Sites</button>
       </div>
 
-      <div class="projs">
-        <a class="proj reveal" href="https://www.plancar.com.br/" target="_blank" rel="noopener" data-cursor="VISITAR">
-          <div class="proj-shot">
-            <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>plancar.com.br</span></div>
-            <img src="img/projeto-plancar.jpg" alt="Página inicial do PlanCar, sistema de agendamento online para lava-rápidos" width="1200" height="750" loading="lazy">
-          </div>
-          <div class="proj-body">
-            <div class="proj-meta"><span class="card-num">01</span><span class="mono">SAAS · CLIENTE REAL</span></div>
-            <h3>PlanCar <span class="proj-go" aria-hidden="true">↗</span></h3>
-            <p>Sistema de agendamento online para lava-rápidos: o cliente agenda pelo celular, e o negócio controla agenda, fila do dia, equipe, pagamentos antecipados com Pix e cartão e relatórios.</p>
+      <div class="bento">
+        <a class="pcard p-feat glass spot tilt" data-cat="agendamento gestao" href="https://www.plancar.com.br/" target="_blank" rel="noopener" data-cursor="VISITAR">
+          <div class="p-body">
+            <div class="p-kicker"><i></i>SaaS · Cliente real</div>
+            <h3 class="p-logo">PlanCar</h3>
+            <p>Sistema de agendamento online para lava-rápidos e serviços automotivos: o cliente agenda pelo celular, e o negócio controla agenda, fila do dia, equipe, pagamento antecipado com Pix e cartão e relatórios.</p>
             <div class="tags"><span>SaaS</span><span>Agendamento</span><span>Pix</span><span>Mercado Pago</span><span>Responsivo</span></div>
+            <span class="btn btn-or btn-sm"><span>Ver projeto</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
           </div>
+          <div class="p-media"><img src="img/projeto-plancar.jpg" alt="Página inicial do PlanCar" width="1200" height="750" loading="lazy" data-par></div>
         </a>
-        <a class="proj reveal" href="https://pedroemerich.github.io/Demonstration_Pages/catalogo.html" target="_blank" rel="noopener" data-cursor="VISITAR">
-          <div class="proj-shot">
-            <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Demonstration_Pages</span></div>
-            <img src="img/projeto-catalogo.jpg" alt="Catálogo com dezenas de modelos de landing page, com filtros por segmento" width="1200" height="750" loading="lazy">
+
+        <article class="pcard p-sched glass spot" data-cat="agendamento sites">
+          <div class="p-head">
+            <div>
+              <div class="p-kicker"><i></i>Sistema · 2 demonstrações</div>
+              <h3 style="margin-top:14px">Sistema de Agendamento</h3>
+            </div>
+            <div class="tags"><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Three.js</span></div>
           </div>
-          <div class="proj-body">
-            <div class="proj-meta"><span class="card-num">02</span><span class="mono">VITRINE · 36 MODELOS</span></div>
-            <h3>Catálogo de Landing Pages <span class="proj-go" aria-hidden="true">↗</span></h3>
-            <p>Vitrine com 36 landing pages prontas para adaptar a cada negócio — saúde, advocacia, gastronomia, automotivo e mais —, com filtros por segmento e visualização em computador, tablet e celular.</p>
-            <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>WebGL</span><span>Animações</span></div>
-          </div>
-        </a>
-        <article class="proj proj-wide reveal">
-          <div class="proj-body proj-intro">
-            <div class="proj-meta"><span class="card-num">03</span><span class="mono">AGENDAMENTO · 2 DEMONSTRAÇÕES</span></div>
-            <h3>Sistema de Agendamento</h3>
-            <p>Agendamento online sob medida para cada negócio: do formulário que leva o paciente direto ao WhatsApp até o sistema completo com conta do cliente, pagamento antecipado e painel da equipe.</p>
-            <div class="tags"><span>React</span><span>TypeScript</span><span>Vite</span><span>Tailwind</span><span>Three.js</span><span>WhatsApp</span><span>Pix</span></div>
-          </div>
+          <p>Agendamento online sob medida para cada negócio: do formulário que leva o paciente direto ao WhatsApp até o sistema completo com conta do cliente, pagamento antecipado e painel da equipe.</p>
           <div class="demos">
-            <a class="demo" href="https://pedroemerich.github.io/Agendamento_Barbearia/" target="_blank" rel="noopener" data-cursor="VISITAR">
-              <div class="proj-shot">
-                <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Agendamento_Barbearia</span></div>
-                <img src="img/projeto-barbearia.jpg" alt="Página inicial da Underground Barbershop, com o botão Agendar horário" width="1200" height="750" loading="lazy">
-              </div>
+            <a class="demo" href="https://pedroemerich.github.io/Agendamento_Barbearia/" target="_blank" rel="noopener" data-cursor="DEMO">
+              <div class="p-media"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Agendamento_Barbearia</span></div><img src="img/projeto-barbearia.jpg" alt="Página inicial da Underground Barbershop" width="1200" height="750" loading="lazy"></div>
               <div class="demo-body">
-                <span class="mono">DEMO 01 · BARBEARIA</span>
-                <h4>Underground Barbershop <span class="proj-go" aria-hidden="true">↗</span></h4>
-                <p>Agendamento em 5 passos, conta do cliente, planos de assinatura, pagamento com Pix e cartão e painel do barbeiro com agenda, relatórios e exportação para PDF e Excel.</p>
+                <span class="demo-k">DEMO 01 · BARBEARIA</span>
+                <h4>Underground Barbershop</h4>
+                <p>Agendamento em 5 passos, conta do cliente, planos de assinatura, Pix e cartão, e painel com agenda e relatórios em PDF e Excel.</p>
                 <span class="demo-hint">Painel do dono: entre com <b>admin</b> · senha <b>demo</b></span>
+                <span class="p-link">Abrir demonstração <svg aria-hidden="true"><use href="#i-out"/></svg></span>
               </div>
             </a>
-            <a class="demo" href="https://pedroemerich.github.io/Clinica_Reumatologia_LP/" target="_blank" rel="noopener" data-cursor="VISITAR">
-              <div class="proj-shot">
-                <div class="proj-bar" aria-hidden="true"><i></i><i></i><i></i><span>pedroemerich.github.io/Clinica_Reumatologia_LP</span></div>
-                <img src="img/projeto-clinica.jpg" alt="Página inicial da Creass Reumatologia, com uma coluna vertebral em 3D" width="1200" height="750" loading="lazy">
-              </div>
+            <a class="demo" href="https://pedroemerich.github.io/Clinica_Reumatologia_LP/" target="_blank" rel="noopener" data-cursor="DEMO">
+              <div class="p-media"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Clinica_Reumatologia_LP</span></div><img src="img/projeto-clinica.jpg" alt="Página inicial da Creass Reumatologia" width="1200" height="750" loading="lazy"></div>
               <div class="demo-body">
-                <span class="mono">DEMO 02 · CLÍNICA</span>
-                <h4>Creass Reumatologia <span class="proj-go" aria-hidden="true">↗</span></h4>
-                <p>Agendamento de consultas pelo WhatsApp: o formulário monta a mensagem com especialidade, período e convênio. Mostra se a clínica está aberta agora e tem uma coluna vertebral em 3D.</p>
+                <span class="demo-k">DEMO 02 · CLÍNICA</span>
+                <h4>Creass Reumatologia</h4>
+                <p>Agendamento de consultas pelo WhatsApp com mensagem pronta, aviso de aberto/fechado em tempo real e coluna vertebral em 3D.</p>
+                <span class="p-link">Abrir demonstração <svg aria-hidden="true"><use href="#i-out"/></svg></span>
               </div>
             </a>
           </div>
         </article>
-      </div>
-    </div>
-  </section>
 
-  <!-- STACK MARQUEE -->
-  <section class="stack" aria-label="Tecnologias">
-    <div class="mq-row" data-dir="-1"><div class="mq-in"><span>Angular</span><span>Node.js</span><span>TypeScript</span><span>JavaScript</span><span>Delphi</span><span>Dart / Flutter</span><span>Python</span></div></div>
-    <div class="mq-row outline" data-dir="1"><div class="mq-in"><span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span><span>ADVPL</span><span>Protheus</span><span>Java</span><span>Git</span></div></div>
-  </section>
-
-  <!-- JOURNEY -->
-  <section class="journey" id="experiencia" data-section="TRAJETÓRIA">
-    <div class="j-rail" aria-hidden="true"><span></span></div>
-    <div class="j-track">
-      <div class="j-panel intro">
-        <div class="eyebrow" data-scramble>Trajetória</div>
-        <h2 class="h2">Cinco anos de código, <span class="soft">aprendizado contínuo e entregas que geram valor real.</span></h2>
-      </div>
-      <div class="j-panel">
-        <div class="j-year" data-y="2021">2021</div>
-        <h3>Desenvolvedor Jr — SBC Soft</h3>
-        <p>Início na SBC Soft, em São Bernardo do Campo: sistemas cross-platform com Delphi/Pascal, bancos SQL Server e publicação de apps na Google Play e na App Store.</p>
-        <span class="mono">// jan 2021 — dez 2024 · delphi · pascal · sql server</span>
-      </div>
-      <div class="j-panel">
-        <div class="j-year" data-y="2023">2023</div>
-        <h3>Engenharia de Software — UMC</h3>
-        <p>Início do bacharelado em Engenharia de Software na Universidade de Mogi das Cruzes, unindo base acadêmica à prática diária no mercado.</p>
-        <span class="mono">// bacharelado · conclusão prevista dez 2026</span>
-      </div>
-      <div class="j-panel">
-        <div class="j-year" data-y="2025">2025</div>
-        <h3>Desenvolvedor Pleno — HM Soluções</h3>
-        <p>Atuação full stack em São Paulo: front-end com Angular e TypeScript, APIs com Node.js e dados em SQL Server, em times ágeis e ambientes corporativos.</p>
-        <span class="mono">// abr 2025 — abr 2026 · angular · node.js · sql server</span>
-      </div>
-      <div class="j-panel">
-        <div class="j-year" data-y="2026">2026</div>
-        <h3>SBC Dev</h3>
-        <p>Consolidação da SBC Dev para entregar engenharia de software sob medida a empresas que valorizam solidez e resultado.</p>
-        <span class="mono">// engenharia sob medida</span>
-      </div>
-      <div class="j-end" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta" id="contato" data-section="CONTATO">
-    <div class="wrap">
-      <div class="eyebrow reveal" style="justify-content:center" data-scramble>Próximo projeto</div>
-      <h2 class="cta-title">Vamos construir<br><span class="grad-t">algo sólido?</span></h2>
-      <p class="reveal">Engenharia de software sob medida para empresas que precisam de soluções robustas, escaláveis e entregues com rigor técnico.</p>
-      <div class="hero-ctas reveal">
-        <a class="btn primary magnetic" data-cursor="WHATS" href="https://wa.me/5511994480107?text=Ol%C3%A1!%20Vi%20seu%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener">
-          <span>Solicitar orçamento</span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <a class="pcard p-cat glass spot tilt" data-cat="sites" href="https://pedroemerich.github.io/Demonstration_Pages/catalogo.html" target="_blank" rel="noopener" data-cursor="VISITAR">
+          <div class="p-media"><img src="img/projeto-catalogo.jpg" alt="Catálogo de modelos de landing page" width="1200" height="750" loading="lazy"></div>
+          <div class="p-body">
+            <div class="p-kicker"><i></i>Vitrine · 36 modelos</div>
+            <h3 style="margin-top:14px">Catálogo de Landing Pages</h3>
+            <p>36 landing pages prontas para adaptar a cada negócio, com filtros por segmento e visualização em computador, tablet e celular.</p>
+            <div class="tags"><span>HTML</span><span>CSS</span><span>WebGL</span></div>
+            <span class="p-link">Ver catálogo <svg aria-hidden="true"><use href="#i-out"/></svg></span>
+          </div>
         </a>
-        <a class="btn ghost magnetic" data-cursor="EMAIL" href="mailto:pedroaugusto.emerich@gmail.com"><span>Enviar e-mail</span></a>
       </div>
-      <div class="contact-strip reveal">
-        <a href="mailto:pedroaugusto.emerich@gmail.com"><span class="k">E-MAIL</span><span class="v">pedroaugusto.emerich@gmail.com</span></a>
-        <a href="https://wa.me/5511994480107" target="_blank" rel="noopener"><span class="k">WHATSAPP</span><span class="v">(11) 9 9448-0107</span></a>
-        <a href="https://github.com/pedroemerich" target="_blank" rel="noopener"><span class="k">GITHUB</span><span class="v">@pedroemerich</span></a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre" data-section="SOBRE">
+    <div class="wrap">
+      <div class="eyebrow rv">Sobre a EMERICH</div>
+      <p class="manifesto" data-words>Tecnologia que <span class="or">soluciona.</span> Integramos pessoas, processos e soluções para levar o seu negócio ao próximo nível — transformando desafios em resultados.</p>
+
+      <div class="pillars">
+        <div class="pillar glass spot rv">
+          <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg></span>
+          <h3>CONEXÃO</h3><p>Integra pessoas, processos e soluções.</p>
+        </div>
+        <div class="pillar glass spot rv">
+          <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 17 5-5-5-5M13 17l5-5-5-5"/></svg></span>
+          <h3>MOVIMENTO</h3><p>Leva o negócio para o próximo nível.</p>
+        </div>
+        <div class="pillar glass spot rv">
+          <span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <h3>SOLUÇÃO</h3><p>Transforma desafios em resultados.</p>
+        </div>
       </div>
+
+      <div class="story">
+        <div class="story-l">
+          <div class="eyebrow rv">Trajetória</div>
+          <h2 class="h2 rv">Cinco anos de código <span class="soft">e entregas que geram valor real.</span></h2>
+          <div class="founder glass rv">
+            <div class="f-id"><span class="f-av" aria-hidden="true">PE</span><div><b>Pedro Augusto Torres Emerich</b><span>Fundador · Desenvolvedor Full Stack</span></div></div>
+            <div class="f-links">
+              <a class="btn btn-or btn-sm magnetic" href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener" data-cursor="ABRIR"><span>Ver currículo</span><svg aria-hidden="true"><use href="#i-out"/></svg></a>
+              <a class="btn btn-gh btn-sm magnetic" href="https://linkedin.com/in/pedroemerich" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+              <a class="btn btn-gh btn-sm magnetic" href="https://github.com/pedroemerich" target="_blank" rel="noopener"><span>GitHub</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-line" aria-hidden="true"><i></i></div>
+          <div class="tl-item rv">
+            <div class="tl-year">2021</div>
+            <h3>Desenvolvedor Jr — SBC Soft</h3>
+            <p>Sistemas cross-platform com Delphi/Pascal, bancos SQL Server e publicação de apps na Google Play e na App Store.</p>
+            <div class="tl-meta">jan 2021 — dez 2024 · São Bernardo do Campo</div>
+          </div>
+          <div class="tl-item rv">
+            <div class="tl-year">2023</div>
+            <h3>Engenharia de Software — UMC</h3>
+            <p>Bacharelado na Universidade de Mogi das Cruzes, unindo base acadêmica à prática diária no mercado.</p>
+            <div class="tl-meta">conclusão prevista dez 2026</div>
+          </div>
+          <div class="tl-item rv">
+            <div class="tl-year">2025</div>
+            <h3>Desenvolvedor Pleno — HM Soluções</h3>
+            <p>Atuação full stack: front-end com Angular e TypeScript, APIs com Node.js e dados em SQL Server, em times ágeis e ambientes corporativos.</p>
+            <div class="tl-meta">abr 2025 — abr 2026 · São Paulo</div>
+          </div>
+          <div class="tl-item now rv">
+            <div class="tl-year">2026</div>
+            <h3>EMERICH Tech Solution</h3>
+            <p>Engenharia de software sob medida para empresas que querem processos conectados, operação no controle e mais resultados.</p>
+            <div class="tl-meta">hoje · São Paulo - SP e região</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contato" data-section="CONTATO">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow rv">Fale com a EMERICH</div>
+        <h2 class="rv">Vamos tirar o seu <span class="or">projeto</span> do papel?</h2>
+        <p class="lead rv">Conte pra gente a sua necessidade. Nossa equipe vai te ajudar a encontrar a melhor solução.</p>
+        <div class="c-list">
+          <a class="c-item rv" href="https://wa.me/5511994480107?text=Ol%C3%A1!%20Vi%20o%20site%20da%20EMERICH%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento." target="_blank" rel="noopener"><span class="c-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4ZM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8Zm8.4-18.2A11.8 11.8 0 0 0 1.7 17.8L0 24l6.3-1.7A11.8 11.8 0 0 0 23.8 12c0-3.2-1.2-6.1-3.4-8.4Z"/></svg></span><div><b>WhatsApp</b><span>(11) 9 9448-0107</span></div></a>
+          <a class="c-item rv" href="mailto:pedroaugusto.emerich@gmail.com"><span class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><b>E-mail</b><span>pedroaugusto.emerich@gmail.com</span></div></a>
+          <div class="c-item rv"><span class="c-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><div><b>Atendimento</b><span>São Paulo - SP e região</span></div></div>
+        </div>
+        <div class="socials rv">
+          <b>Acompanhe a EMERICH</b>
+          <div>
+            <a href="https://linkedin.com/in/pedroemerich" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4V9.75Z"/></svg></a>
+            <a href="https://github.com/pedroemerich" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <form class="form glass spot rv" id="form" novalidate>
+        <h3>Envie uma mensagem</h3>
+        <p>Preencha o formulário e a mensagem abre pronta no WhatsApp.</p>
+        <div class="f-grid">
+          <div class="field"><label for="f-nome">Nome <em>*</em></label><input id="f-nome" name="nome" placeholder="Seu nome" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">E-mail <em>*</em></label><input id="f-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email" required></div>
+          <div class="field"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" placeholder="Nome da sua empresa" autocomplete="organization"></div>
+          <div class="field"><label for="f-tel">Telefone</label><input id="f-tel" name="tel" type="tel" placeholder="(11) 99999-0000" autocomplete="tel"></div>
+          <div class="field full"><label for="f-msg">Mensagem <em>*</em></label><textarea id="f-msg" name="msg" placeholder="Conte brevemente sobre o seu projeto, necessidade ou ideia." required></textarea></div>
+        </div>
+        <button class="btn btn-or magnetic" type="submit"><span>Enviar mensagem</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="f-note">Nenhum dado é armazenado: a mensagem é enviada pelo seu WhatsApp.</p>
+      </form>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <div class="f-grid">
+    <div class="ft">
       <div>
-        <a href="#top" class="logo"><div class="logo-mark"><div class="logo-cube"><b></b><b></b><b></b><b></b><b></b><b></b></div></div><span>SBC<em>.</em>DEV</span></a>
-        <p>Por Pedro Augusto Torres Emerich, 21 anos — desenvolvedor com 5 anos de experiência prática e graduando em Engenharia de Software.</p>
+        <a href="#inicio" class="brand"><svg class="emark" viewBox="0 0 140 90" aria-hidden="true"><use href="#emark"/></svg><span class="brand-sep" aria-hidden="true"></span><span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span></a>
+        <p>Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados.</p>
       </div>
-      <div>
-        <h4>CONTATO</h4>
-        <ul><li><a href="mailto:pedroaugusto.emerich@gmail.com">pedroaugusto.emerich@gmail.com</a></li><li><a href="https://wa.me/5511994480107" target="_blank" rel="noopener">(11) 9 9448-0107</a></li></ul>
-      </div>
-      <div>
-        <h4>REDES</h4>
-        <ul><li><a href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener">Currículo ↗</a></li><li><a href="https://linkedin.com/in/pedroemerich" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/pedroemerich" target="_blank" rel="noopener">GitHub ↗</a></li></ul>
-      </div>
+      <div><h4>NAVEGAÇÃO</h4><ul><li><a href="#servicos">Serviços</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#contato">Contato</a></li></ul></div>
+      <div><h4>CONTATO</h4><ul><li><a href="https://wa.me/5511994480107" target="_blank" rel="noopener">(11) 9 9448-0107</a></li><li><a href="mailto:pedroaugusto.emerich@gmail.com">E-mail</a></li><li><a href="curriculo-pedro-emerich.pdf" target="_blank" rel="noopener">Currículo ↗</a></li></ul></div>
+      <div><h4>REDES</h4><ul><li><a href="https://linkedin.com/in/pedroemerich" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/pedroemerich" target="_blank" rel="noopener">GitHub ↗</a></li></ul></div>
     </div>
-    <div class="f-big" aria-hidden="true">SBC.DEV</div>
-    <div class="f-bottom"><span>© 2026 SBC DEV — BUILD_VERSION_2.0.0</span><span>SÃO BERNARDO DO CAMPO, SP — BRASIL</span></div>
+    <div class="f-big" aria-hidden="true">EMERICH</div>
+    <div class="f-bottom"><span>© <span id="yr">2026</span> EMERICH Tech Solution · Pedro Emerich</span><span>São Paulo - SP · Brasil</span></div>
   </div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
-
-<script type="module">
-import * as THREE from 'three';
-
+<script>
+(() => {
+const root = document.documentElement;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-const isMobile = () => innerWidth < 760;
-gsap.registerPlugin(ScrollTrigger);
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+if (reduce || !hasGsap) root.classList.add('no-anim');
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ================= pointer state ================= */
+const mouse = { x: innerWidth / 2, y: innerHeight / 2, nx: 0, ny: 0 };
+addEventListener('pointermove', e => {
+  mouse.x = e.clientX; mouse.y = e.clientY;
+  mouse.nx = e.clientX / innerWidth * 2 - 1; mouse.ny = -(e.clientY / innerHeight * 2 - 1);
+}, { passive: true });
 
 /* ================= smooth scroll ================= */
 let lenis = null;
-if (!reduce && window.Lenis) {
-  lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t => lenis.raf(t * 1000));
-  gsap.ticker.lagSmoothing(0);
-  lenis.stop();
+if (window.Lenis && !reduce) {
+  lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+  if (hasGsap) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
 }
+const scrollToEl = el => {
+  if (lenis) lenis.scrollTo(el, { offset: el.id === 'inicio' ? 0 : -20, duration: 1.5 });
+  else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+};
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-  const target = document.querySelector(a.getAttribute('href'));
-  if (!target) return;
+  const id = a.getAttribute('href');
+  const el = id.length > 1 && document.querySelector(id);
+  if (!el) return;
   e.preventDefault();
-  if (lenis) lenis.scrollTo(target, { offset: 0, duration: 1.6 });
-  else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  closeMenu();
+  scrollToEl(el);
 }));
 
-/* ================= pointer ================= */
-const mouse = { x: innerWidth / 2, y: innerHeight / 2, nx: 0, ny: 0, sx: 0, sy: 0, active: 0 };
-addEventListener('pointermove', e => {
-  mouse.x = e.clientX; mouse.y = e.clientY;
-  mouse.nx = (e.clientX / innerWidth) * 2 - 1;
-  mouse.ny = -(e.clientY / innerHeight) * 2 + 1;
-  mouse.active = 1;
-}, { passive: true });
-document.addEventListener('pointerleave', () => { mouse.active = 0; });
+/* ================= mobile menu ================= */
+const burger = document.querySelector('.burger');
+function closeMenu() { root.classList.remove('menu-open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Abrir menu'); lenis && lenis.start(); }
+burger.addEventListener('click', () => {
+  const open = !root.classList.contains('menu-open');
+  if (!open) return closeMenu();
+  root.classList.add('menu-open'); burger.setAttribute('aria-expanded', 'true'); burger.setAttribute('aria-label', 'Fechar menu'); lenis && lenis.stop();
+});
+addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-/* ================= text helpers ================= */
-function splitChars(el) {
-  const text = el.textContent;
-  el.setAttribute('aria-label', text);
-  el.textContent = '';
-  text.split(' ').forEach((w, wi, arr) => {
-    const word = document.createElement('span');
-    word.className = 'word'; word.setAttribute('aria-hidden', 'true');
-    [...w].forEach(ch => { const c = document.createElement('span'); c.className = 'char'; c.textContent = ch; word.appendChild(c); });
-    el.appendChild(word);
-    if (wi < arr.length - 1) el.appendChild(document.createTextNode(' '));
-  });
+/* ================= loader ================= */
+const loaderNum = document.querySelector('.loader-num'), loaderBar = document.querySelector('.loader-bar i');
+const heroWords = document.querySelectorAll('.hero .wi');
+if (hasGsap && !reduce) {
+  gsap.set(heroWords, { yPercent: 110, rotate: 4 });
+  gsap.set('.hero-tag, .hero-sub, .hero-ctas, .chip, .scroll-hint', { opacity: 0, y: 30 });
 }
-document.querySelectorAll('.split').forEach(splitChars);
+const t0 = performance.now(), LOAD_MS = reduce ? 200 : 1500;
+function loadTick(now) {
+  const p = Math.min(1, (now - t0) / LOAD_MS), e = 1 - Math.pow(1 - p, 3);
+  loaderNum.textContent = Math.round(e * 100);
+  loaderBar.style.transform = `scaleX(${e})`;
+  if (p < 1) requestAnimationFrame(loadTick); else setTimeout(intro, 180);
+}
+requestAnimationFrame(loadTick);
+function intro() {
+  root.classList.add('loaded');
+  if (!hasGsap || reduce) return;
+  const tl = gsap.timeline({ delay: 0.35 });
+  tl.to(heroWords, { yPercent: 0, rotate: 0, duration: 1.3, ease: 'expo.out', stagger: 0.07 })
+    .to('.hero-tag', { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, 0.1)
+    .to('.hero-sub, .hero-ctas', { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1 }, 0.55)
+    .to('.chip', { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.12 }, 0.75)
+    .to('.scroll-hint', { opacity: 1, y: 0, duration: 1 }, 1);
+}
 
-const GLYPHS = '!<>-_\\/[]{}=+*^?#01ΣΔ';
-function scramble(el) {
-  const final = el.dataset.text || el.textContent;
-  el.dataset.text = final;
-  if (reduce) { el.textContent = final; return; }
-  cancelAnimationFrame(el._raf);
-  let frame = 0;
-  const tick = () => {
-    let out = '';
-    for (let i = 0; i < final.length; i++) {
-      out += (frame > i * 1.6 + 4 || final[i] === ' ') ? final[i] : GLYPHS[(Math.random() * GLYPHS.length) | 0];
-    }
-    el.textContent = out;
-    if (++frame < final.length * 1.6 + 6) el._raf = requestAnimationFrame(tick);
-    else el.textContent = final;
-  };
-  tick();
+/* ================= WebGL ribbons ================= */
+const bgState = { s: 0, h: 1, mx: 0, my: 0 };
+(() => {
+  const cv = document.getElementById('bg');
+  const gl = cv.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance', preserveDrawingBuffer: false });
+  if (!gl) { root.classList.add('no-gl'); return; }
+  const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const fs = `precision highp float;
+uniform vec2 R;uniform float T;uniform vec2 M;uniform float S;uniform float H;
+float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+float ribbon(vec2 p,vec2 c,float r,float bw){
+  float d=abs(length(p-c)-r);
+  float edge=.0021/(abs(d-bw)+.0013);
+  float fill=smoothstep(bw,0.,d);
+  float core=.0035/(d+.0035);
+  return edge*.5+fill*.26+core*.24;
 }
-document.querySelectorAll('[data-hover-scramble]').forEach(el => el.addEventListener('mouseenter', () => scramble(el)));
+void main(){
+  vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;
+  float A=R.x/R.y*.5;
+  vec2 p=uv-M*.03;
+  vec2 c=vec2(A+.3,-1.08)+vec2(-.42,.26)*S+vec2(.02*sin(T*.21),.015*cos(T*.17));
+  float I=0.;
+  for(int i=0;i<3;i++){
+    float fi=float(i);
+    float r=1.+fi*.21+.012*sin(T*.45+fi*1.9)+.06*S;
+    I+=(1.-fi*.23)*ribbon(p,c,r,.05-.008*fi);
+  }
+  vec2 c2=vec2(-A-.9,1.55)+vec2(.3,-.2)*S;
+  I+=.28*ribbon(p,c2,1.45+.01*sin(T*.3),.035);
+  vec3 orc=vec3(1.,.415,0.);
+  vec3 col=orc*I*.85+vec3(1.,.82,.62)*pow(max(I-1.2,0.),2.)*.12;
+  col+=orc*.10*exp(-length(p-vec2(A*.6,-.35))*1.6);
+  vec2 mu=vec2(M.x*A,M.y*.5);
+  col+=orc*.06*exp(-length(uv-mu)*4.5);
+  col=1.-exp(-col*1.35);
+  col*=smoothstep(1.45,.15,length(uv*vec2(.75/max(A,.5),1.15)));
+  col*=H;
+  col+=vec3(.018,.016,.015);
+  col+=(hash(gl_FragCoord.xy+fract(T*.7)*91.)-.5)*.03;
+  gl_FragColor=vec4(col,1.);
+}`;
+  const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; };
+  const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
+  if (!v || !f) { root.classList.add('no-gl'); return; }
+  const pr = gl.createProgram(); gl.attachShader(pr, v); gl.attachShader(pr, f); gl.linkProgram(pr);
+  if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) { root.classList.add('no-gl'); return; }
+  gl.useProgram(pr);
+  const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  const U = n => gl.getUniformLocation(pr, n);
+  const uR = U('R'), uT = U('T'), uM = U('M'), uS = U('S'), uH = U('H');
+  let scale = Math.min(devicePixelRatio, 1.5) * (innerWidth < 700 ? 0.8 : 1);
+  const resize = () => { cv.width = Math.round(innerWidth * scale); cv.height = Math.round(innerHeight * scale); gl.viewport(0, 0, cv.width, cv.height); };
+  resize(); addEventListener('resize', resize);
+  let visible = true, last = performance.now(), slow = 0;
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; if (visible) requestAnimationFrame(frame); });
+  function frame(now) {
+    if (!visible) return;
+    const dt = now - last; last = now;
+    if (dt > 34 && scale > 0.6) { if (++slow > 40) { scale *= 0.8; resize(); slow = 0; } } else slow = Math.max(0, slow - 1);
+    bgState.mx += (mouse.nx - bgState.mx) * 0.05; bgState.my += (mouse.ny - bgState.my) * 0.05;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const s = max > 0 ? scrollY / max : 0;
+    bgState.s += (s - bgState.s) * 0.08;
+    const heroK = Math.max(0, 1 - scrollY / (innerHeight * 0.9));
+    const target = 0.5 + 0.5 * heroK;
+    bgState.h += (target - bgState.h) * 0.08;
+    gl.uniform2f(uR, cv.width, cv.height);
+    gl.uniform1f(uT, reduce ? 0 : now / 1000);
+    gl.uniform2f(uM, bgState.mx, bgState.my);
+    gl.uniform1f(uS, bgState.s);
+    gl.uniform1f(uH, bgState.h);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
 
 /* ================= cursor ================= */
-const cursor = document.getElementById('cursor');
-const cDot = cursor.querySelector('.c-dot'), cRing = cursor.querySelector('.c-ring'), cLabel = cursor.querySelector('.c-label');
-const ring = { x: mouse.x, y: mouse.y };
+if (fine) {
+  root.classList.add('has-cursor');
+  const cur = document.querySelector('.cursor'), dot = cur.querySelector('.c-dot'), ring = cur.querySelector('.c-ring'), label = cur.querySelector('.c-label');
+  let rx = mouse.x, ry = mouse.y;
+  (function loop() {
+    rx += (mouse.x - rx) * 0.16; ry += (mouse.y - ry) * 0.16;
+    dot.style.transform = `translate(${mouse.x}px,${mouse.y}px)`;
+    ring.style.transform = `translate(${rx}px,${ry}px)`;
+    requestAnimationFrame(loop);
+  })();
+  addEventListener('pointerover', e => {
+    const t = e.target.closest('[data-cursor],a,button,input,textarea,label');
+    cur.classList.remove('hover', 'label', 'text');
+    if (!t) return;
+    if (t.matches('input,textarea')) return cur.classList.add('text');
+    if (t.dataset.cursor) { label.textContent = t.dataset.cursor; cur.classList.add('label'); }
+    else cur.classList.add('hover');
+  });
+  addEventListener('pointerdown', () => cur.classList.add('down'));
+  addEventListener('pointerup', () => cur.classList.remove('down'));
+  document.addEventListener('pointerleave', () => cur.style.opacity = 0);
+  document.addEventListener('pointerenter', () => cur.style.opacity = 1);
+}
+
+/* ================= magnetic, spotlight, tilt ================= */
 if (fine && !reduce) {
-  document.body.classList.add('has-cursor');
-  document.addEventListener('mouseover', e => {
-    const t = e.target.closest('a,button,[data-cursor]');
-    cursor.classList.toggle('hover', !!t);
-    cLabel.textContent = t?.dataset.cursor || '';
-  });
-}
-
-/* ================= magnetic ================= */
-if (fine && !reduce) document.querySelectorAll('.magnetic').forEach(el => {
-  el.addEventListener('mousemove', e => {
-    const r = el.getBoundingClientRect();
-    gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * 0.3, y: (e.clientY - r.top - r.height / 2) * 0.45, duration: 0.4, ease: 'power3.out' });
-  });
-  el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1,0.4)' }));
-});
-
-/* ================= 3D tilt cards ================= */
-if (fine && !reduce) document.querySelectorAll('.card').forEach(card => {
-  const inner = card.querySelector('.card-inner');
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-    inner.style.setProperty('--mx', px * 100 + '%');
-    inner.style.setProperty('--my', py * 100 + '%');
-    gsap.to(inner, { rotateY: (px - 0.5) * 16, rotateX: (0.5 - py) * 16, z: 20, duration: 0.5, ease: 'power2.out' });
-  });
-  card.addEventListener('mouseleave', () => gsap.to(inner, { rotateY: 0, rotateX: 0, z: 0, duration: 0.9, ease: 'elastic.out(1,0.5)' }));
-});
-
-/* ================= WebGL core ================= */
-const canvas = document.getElementById('gl');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
-const DPR = Math.min(devicePixelRatio, 2);
-renderer.setPixelRatio(DPR);
-renderer.setSize(innerWidth, innerHeight);
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 200);
-camera.position.set(0, 0, 9);
-
-const N = isMobile() ? 9000 : 18000;
-const pSphere = new Float32Array(N * 3), pWave = new Float32Array(N * 3), pRing = new Float32Array(N * 3), rnd = new Float32Array(N);
-const side = Math.ceil(Math.sqrt(N));
-for (let i = 0; i < N; i++) {
-  // fibonacci sphere
-  const t = (i + 0.5) / N, phi = Math.acos(1 - 2 * t), th = Math.PI * (1 + Math.sqrt(5)) * i, r = 2.0;
-  pSphere.set([r * Math.sin(phi) * Math.cos(th), r * Math.sin(phi) * Math.sin(th), r * Math.cos(phi)], i * 3);
-  // wave grid
-  pWave.set([((i % side) / side - 0.5) * 13, 0, (Math.floor(i / side) / side - 0.5) * 13], i * 3);
-  // torus
-  const u = Math.random() * Math.PI * 2, v = Math.random() * Math.PI * 2, R = 2.7, tr = 0.12 + Math.random() * 0.5 * Math.random();
-  pRing.set([(R + tr * Math.cos(v)) * Math.cos(u), (R + tr * Math.cos(v)) * Math.sin(u), tr * Math.sin(v) * 1.5], i * 3);
-  rnd[i] = Math.random();
-}
-const geo = new THREE.BufferGeometry();
-geo.setAttribute('position', new THREE.BufferAttribute(pSphere, 3));
-geo.setAttribute('aWave', new THREE.BufferAttribute(pWave, 3));
-geo.setAttribute('aRing', new THREE.BufferAttribute(pRing, 3));
-geo.setAttribute('aRnd', new THREE.BufferAttribute(rnd, 1));
-
-const NOISE = `
-vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
-vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
-vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
-vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
-float snoise(vec3 v){
-  const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
-  vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
-  vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
-  vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
-  i=mod289(i);
-  vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
-  float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;
-  vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);
-  vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
-  vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
-  vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));
-  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-  vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
-  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
-  vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
-  return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-}`;
-
-const uniforms = {
-  uTime: { value: 0 }, uMorph: { value: 0 }, uMouse: { value: new THREE.Vector2(9, 9) },
-  uAspect: { value: innerWidth / innerHeight }, uHover: { value: 0 }, uPixel: { value: 1.5 * DPR },
-  uOpacity: { value: 0 }, uTurb: { value: 1.5 },
-};
-const mat = new THREE.ShaderMaterial({
-  uniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
-  vertexShader: `
-    uniform float uTime,uMorph,uAspect,uHover,uPixel,uTurb; uniform vec2 uMouse;
-    attribute vec3 aWave,aRing; attribute float aRnd;
-    varying float vGlow; varying float vRnd;
-    ${NOISE}
-    void main(){
-      vec3 s=position; float n=snoise(s*0.55+uTime*0.18);
-      s+=normalize(s)*n*(0.28+uTurb*0.25);
-      vec3 w=aWave; w.y=sin(w.x*0.7+uTime*1.1)*0.45+cos(w.z*0.6+uTime*0.8)*0.45+snoise(vec3(w.xz*0.25,uTime*0.2))*0.5;
-      vec3 r=aRing; r+=normalize(r)*snoise(r*0.7+uTime*0.25)*(0.18+uTurb*0.2);
-      float m1=clamp(uMorph,0.,1.),m2=clamp(uMorph-1.,0.,1.),m3=clamp(uMorph-2.,0.,1.);
-      float d=aRnd*0.25; // staggered morph per particle
-      m1=smoothstep(d,d+0.75,m1);m2=smoothstep(d,d+0.75,m2);m3=smoothstep(d,d+0.75,m3);
-      vec3 p=mix(mix(mix(s,w,m1),r,m2),s,m3);
-      vec4 mv=modelViewMatrix*vec4(p,1.);
-      vec4 clip=projectionMatrix*mv;
-      vec2 dd=clip.xy/clip.w-uMouse; dd.x*=uAspect;
-      float f=smoothstep(0.42,0.,length(dd))*uHover;
-      mv.xy+=normalize(dd+1e-5)*f*0.7; mv.z+=f*1.2;
-      vGlow=f+max(n,0.)*0.35; vRnd=aRnd;
-      gl_Position=projectionMatrix*mv;
-      gl_PointSize=uPixel*(0.8+aRnd*1.6+f*2.5)*(9.0/-mv.z);
-    }`,
-  fragmentShader: `
-    uniform float uOpacity; varying float vGlow; varying float vRnd;
-    void main(){
-      float d=length(gl_PointCoord-.5); float a=smoothstep(.5,0.,d); a*=a;
-      vec3 blue=vec3(.23,.51,.96),cyan=vec3(.13,.83,.93),vio=vec3(.55,.36,.96);
-      vec3 col=mix(blue,cyan,vRnd); col=mix(col,vio,smoothstep(.75,1.,vRnd)*.7); col+=vGlow*.55;
-      gl_FragColor=vec4(col,a*uOpacity*(.5+vGlow));
-    }`,
-});
-const group = new THREE.Group();
-const points = new THREE.Points(geo, mat);
-group.add(points);
-
-// orbit rings
-const orbitMat = new THREE.LineBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0, blending: THREE.AdditiveBlending });
-const orbits = [3.0, 3.5].map((rad, k) => {
-  const pts = [];
-  for (let i = 0; i <= 160; i++) { const a = i / 160 * Math.PI * 2; pts.push(new THREE.Vector3(Math.cos(a) * rad, Math.sin(a) * rad, 0)); }
-  const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), orbitMat);
-  l.rotation.set(k ? 1.2 : 1.45, k ? 0.5 : -0.3, 0);
-  group.add(l); return l;
-});
-scene.add(group);
-
-// background stars
-const SN = 1600, sPos = new Float32Array(SN * 3);
-for (let i = 0; i < SN; i++) {
-  const r = 14 + Math.random() * 30, a = Math.random() * Math.PI * 2, b = Math.acos(Math.random() * 2 - 1);
-  sPos.set([r * Math.sin(b) * Math.cos(a), r * Math.sin(b) * Math.sin(a), r * Math.cos(b) - 10], i * 3);
-}
-const stars = new THREE.Points(
-  new THREE.BufferGeometry().setAttribute('position', new THREE.BufferAttribute(sPos, 3)),
-  new THREE.PointsMaterial({ color: 0x7a96ff, size: 0.06, transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending })
-);
-scene.add(stars);
-
-/* scroll keyframes for the core */
-const keys = [
-  { sel: '#top',        at: () => 0,                 m: 0, x: 2.4, y: 0.1, s: 1.0,  o: 1.0,  rx: 0.0 },
-  { sel: '#servicos',   at: el => el.top - innerHeight * 0.35, m: 1, x: 0, y: -0.9, s: 1.0, o: 0.55, rx: 0.55 },
-  { sel: '#experiencia',at: el => el.top,            m: 2, x: 0, y: -0.2, s: 1.0, o: 0.85, rx: 1.15 },
-  { sel: '#contato',    at: el => el.top - innerHeight * 0.25, m: 3, x: 0, y: 0.2, s: 1.25, o: 0.7, rx: 0.0 },
-];
-function computeKeys() {
-  keys.forEach(k => {
-    const r = document.querySelector(k.sel).getBoundingClientRect();
-    k.pos = k.at({ top: r.top + scrollY });
-  });
-}
-ScrollTrigger.addEventListener('refresh', computeKeys);
-computeKeys();
-const smooth = t => t * t * (3 - 2 * t);
-function sampleKeys(y) {
-  if (y <= keys[0].pos) return keys[0];
-  for (let i = 0; i < keys.length - 1; i++) {
-    const a = keys[i], b = keys[i + 1];
-    if (y <= b.pos) {
-      const t = smooth(Math.min(1, Math.max(0, (y - a.pos) / Math.max(1, b.pos - a.pos))));
-      const o = {}; ['m', 'x', 'y', 's', 'o', 'rx'].forEach(p => o[p] = a[p] + (b[p] - a[p]) * t);
-      return o;
-    }
-  }
-  return keys[keys.length - 1];
-}
-
-const st = { m: 0, x: 2.4, y: 0, s: 1, o: 1, rx: 0, intro: 0 };
-const clock = new THREE.Clock();
-let velocity = 0;
-const hudCursor = document.querySelector('.hud-cursor');
-
-function frame() {
-  const dt = Math.min(clock.getDelta(), 0.05);
-  const time = clock.elapsedTime * (reduce ? 0.2 : 1);
-  velocity = lenis ? lenis.velocity : 0;
-
-  const target = sampleKeys(scrollY);
-  const mob = isMobile();
-  const k = 1 - Math.pow(0.0015, dt);
-  st.m += (target.m - st.m) * k;
-  st.x += ((mob ? 0 : target.x) - st.x) * k;
-  st.y += ((mob && target.m < 0.5 ? 1.2 : target.y) - st.y) * k;
-  st.s += (target.s * (mob ? 0.8 : 1) - st.s) * k;
-  st.o += ((mob && target.m < 0.5 ? 0.6 : target.o) - st.o) * k;
-  st.rx += (target.rx - st.rx) * k;
-
-  mouse.sx += (mouse.nx - mouse.sx) * 0.08;
-  mouse.sy += (mouse.ny - mouse.sy) * 0.08;
-
-  uniforms.uTime.value = time;
-  uniforms.uMorph.value = st.m;
-  uniforms.uMouse.value.set(mouse.sx, mouse.sy);
-  uniforms.uHover.value += ((reduce ? 0 : mouse.active) - uniforms.uHover.value) * 0.05;
-  uniforms.uTurb.value += ((Math.min(Math.abs(velocity) * 0.04, 1.2) + (1 - st.intro) * 3) - uniforms.uTurb.value) * 0.08;
-  uniforms.uOpacity.value = st.o * st.intro;
-
-  group.position.set(st.x, st.y, 0);
-  group.scale.setScalar(st.s * (0.3 + 0.7 * st.intro));
-  group.rotation.y = time * 0.08 + mouse.sx * 0.35;
-  group.rotation.x = st.rx - mouse.sy * 0.2;
-  const sphereW = st.m < 1 ? 1 - st.m : st.m > 2 ? st.m - 2 : 0;
-  orbitMat.opacity = 0.16 * sphereW * st.intro;
-  orbits[0].rotation.z = time * 0.2; orbits[1].rotation.z = -time * 0.14;
-
-  stars.rotation.y = time * 0.01 + mouse.sx * 0.05;
-  stars.rotation.x = mouse.sy * 0.03 + scrollY * 0.00004;
-  camera.position.y = -mouse.sy * 0.15;
-  camera.position.x = mouse.sx * 0.15;
-  camera.lookAt(0, 0, 0);
-  renderer.render(scene, camera);
-
-  // cursor + HUD
-  if (fine && !reduce) {
-    ring.x += (mouse.x - ring.x) * 0.18; ring.y += (mouse.y - ring.y) * 0.18;
-    cDot.style.transform = `translate3d(${mouse.x}px,${mouse.y}px,0)`;
-    cRing.style.transform = `translate3d(${ring.x}px,${ring.y}px,0)`;
-  }
-  if (hudCursor) hudCursor.textContent = `X ${String(Math.round(mouse.x)).padStart(4, '0')} · Y ${String(Math.round(mouse.y)).padStart(4, '0')}`;
-}
-gsap.ticker.add(frame);
-
-addEventListener('resize', () => {
-  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-  uniforms.uAspect.value = innerWidth / innerHeight;
-});
-
-/* ================= marquee (scroll-velocity reactive) ================= */
-const rows = [...document.querySelectorAll('.mq-row')].map(row => {
-  const inner = row.querySelector('.mq-in');
-  inner.innerHTML += inner.innerHTML + inner.innerHTML;
-  inner.style.display = 'flex';
-  return { row, inner, dir: +row.dataset.dir, x: 0 };
-});
-gsap.ticker.add(() => {
-  const v = velocity;
-  rows.forEach(r => {
-    const w = r.inner.scrollWidth / 3;
-    r.x += r.dir * (reduce ? 0 : 0.6 + Math.abs(v) * 0.25) * (v < 0 ? -1 : 1);
-    r.x = ((r.x % w) + w) % w;
-    r.inner.style.transform = `translate3d(${-r.x}px,0,0) skewX(${gsap.utils.clamp(-12, 12, -v * 0.35)}deg)`;
-  });
-});
-
-/* horizontal journey */
-const mm = gsap.matchMedia();
-mm.add('(min-width: 901px)', () => {
-  const track = document.querySelector('.j-track');
-  const rail = document.querySelector('.j-rail span');
-  const dist = () => track.scrollWidth - innerWidth;
-  const tween = gsap.to(track, {
-    x: () => -dist(), ease: 'none',
-    scrollTrigger: {
-      trigger: '.journey', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: reduce ? true : 1,
-      invalidateOnRefresh: true, onUpdate: s => rail.style.transform = `scaleX(${s.progress})`,
-    },
-  });
-  document.querySelectorAll('.j-panel:not(.intro)').forEach(p => {
-    ScrollTrigger.create({ trigger: p, containerAnimation: tween, start: 'left 65%', onEnter: () => p.classList.add('active'), onLeaveBack: () => p.classList.remove('active') });
-    if (!reduce) gsap.from(p.querySelectorAll('h3,p,.mono'), {
-      x: 120, opacity: 0, stagger: 0.06, ease: 'none',
-      scrollTrigger: { trigger: p, containerAnimation: tween, start: 'left 95%', end: 'left 45%', scrub: true },
+  document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.28, y = (e.clientY - r.top - r.height / 2) * 0.4;
+      el.style.transition = 'transform .25s ease-out'; el.style.transform = `translate(${x}px,${y}px)`;
     });
+    el.addEventListener('pointerleave', () => { el.style.transition = 'transform .9s cubic-bezier(.2,1.6,.3,1)'; el.style.transform = ''; });
   });
-});
-mm.add('(max-width: 900px)', () => {
-  document.querySelectorAll('.j-panel:not(.intro)').forEach(p =>
-    ScrollTrigger.create({ trigger: p, start: 'top 75%', onEnter: () => p.classList.add('active') }));
-});
+  document.querySelectorAll('.spot').forEach(el => el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+  document.querySelectorAll('.tilt').forEach(el => {
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transition = 'transform .3s ease-out';
+      el.style.transform = `perspective(1400px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg) translateZ(0)`;
+    });
+    el.addEventListener('pointerleave', () => { el.style.transition = 'transform 1s cubic-bezier(.2,.8,.2,1)'; el.style.transform = ''; });
+  });
+  // hero chips follow the mouse at different depths
+  const chips = [...document.querySelectorAll('.chip')];
+  let cx = 0, cy = 0;
+  (function chipLoop() {
+    cx += (mouse.nx - cx) * 0.06; cy += (mouse.ny - cy) * 0.06;
+    chips.forEach(c => { const d = +c.dataset.depth; c.style.translate = `${cx * d * -14}px ${cy * d * 12}px`; });
+    requestAnimationFrame(chipLoop);
+  })();
+}
 
-/* ================= scroll-driven UI ================= */
-const progress = document.querySelector('.progress span');
+/* ================= project filters ================= */
+const fBtns = document.querySelectorAll('.filters button'), cards = document.querySelectorAll('.pcard');
+fBtns.forEach(btn => btn.addEventListener('click', () => {
+  fBtns.forEach(b => { b.classList.toggle('on', b === btn); b.setAttribute('aria-pressed', b === btn); });
+  const f = btn.dataset.f;
+  cards.forEach(c => c.classList.toggle('off', f !== 'todos' && !c.dataset.cat.split(' ').includes(f)));
+}));
+
+/* ================= contact form -> WhatsApp ================= */
+document.getElementById('form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.currentTarget, v = n => f.elements[n].value.trim();
+  let ok = true;
+  ['nome', 'email', 'msg'].forEach(n => {
+    const bad = !v(n) || (n === 'email' && !/^\S+@\S+\.\S+$/.test(v(n)));
+    f.elements[n].closest('.field').classList.toggle('err', bad);
+    if (bad && ok) { f.elements[n].focus(); ok = false; }
+  });
+  if (!ok) return;
+  const lines = [`Olá! Me chamo ${v('nome')}${v('empresa') ? ` (${v('empresa')})` : ''}.`, '', v('msg'), '', `E-mail: ${v('email')}`];
+  if (v('tel')) lines.push(`Telefone: ${v('tel')}`);
+  window.open('https://wa.me/5511994480107?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+});
+document.querySelectorAll('.field input,.field textarea').forEach(i => i.addEventListener('input', () => i.closest('.field').classList.remove('err')));
+
+/* ================= nav: scrolled / hide / active indicator ================= */
+const nav = document.querySelector('.nav'), ind = document.querySelector('.nav-ind');
+const links = [...document.querySelectorAll('.nav-links a')];
+let lastY = 0;
+function navScroll() {
+  const y = scrollY;
+  nav.classList.toggle('scrolled', y > 40);
+  nav.classList.toggle('hide', y > lastY + 4 && y > innerHeight * 0.8 && !root.classList.contains('menu-open'));
+  if (y < lastY - 4 || y < innerHeight * 0.8) nav.classList.remove('hide');
+  lastY = y;
+}
+addEventListener('scroll', navScroll, { passive: true });
+function setActive(id) {
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  const a = links.find(l => l.classList.contains('active'));
+  if (!a) { ind.style.opacity = 0; return; }
+  ind.style.opacity = 1; ind.style.left = (a.offsetLeft + 16) + 'px'; ind.style.width = (a.offsetWidth - 32) + 'px';
+}
+const hudIdx = document.querySelector('.hud-idx'), hudName = document.querySelector('.hud-name');
+const secs = [...document.querySelectorAll('[data-section]')];
+const io = new IntersectionObserver(ents => ents.forEach(en => {
+  if (!en.isIntersecting) return;
+  const i = secs.indexOf(en.target);
+  hudIdx.textContent = String(i + 1).padStart(2, '0');
+  hudName.textContent = en.target.dataset.section;
+  setActive(en.target.id);
+}), { rootMargin: '-45% 0px -50% 0px' });
+secs.forEach(s => io.observe(s));
+addEventListener('resize', () => { const a = links.find(l => l.classList.contains('active')); a && setActive(a.getAttribute('href').slice(1)); });
+
+/* ================= footer word ================= */
+const fBig = document.querySelector('.f-big');
+new IntersectionObserver(([en]) => fBig.classList.toggle('lit', en.isIntersecting), { threshold: 0.4 }).observe(fBig);
+
+/* ================= manifesto words ================= */
+const man = document.querySelector('[data-words]');
+(function splitWords(node) {
+  [...node.childNodes].forEach(n => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(w => {
+        if (!w) return;
+        if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+        const s = document.createElement('span'); s.className = 'mw'; s.textContent = w; frag.appendChild(s);
+      });
+      n.replaceWith(frag);
+    } else if (n.nodeType === 1) { n.classList.add('mw'); }
+  });
+})(man);
+
+/* ================= scroll animations ================= */
+if (!hasGsap || reduce) return;
+const progress = document.querySelector('.progress i');
 ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => progress.style.transform = `scaleX(${s.progress})` });
 
-const nav = document.querySelector('.nav');
-ScrollTrigger.create({ start: 80, end: 'max', onToggle: s => nav.classList.toggle('scrolled', s.isActive) });
+// hero exit
+const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
+gsap.to('.hero-title', { yPercent: -18, scale: 0.94, opacity: 0.1, filter: 'blur(6px)', transformOrigin: '0 0', ease: 'none', scrollTrigger: heroST });
+gsap.to('.hero-sub, .hero-ctas, .hero-tag', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
+gsap.to('.chips', { y: -140, ease: 'none', scrollTrigger: heroST });
+gsap.to('.scroll-hint', { opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '20% top' } });
 
-const sideIdx = document.querySelector('.side-idx'), sideName = document.querySelector('.side-name');
-document.querySelectorAll('[data-section]').forEach((sec, i) => {
-  ScrollTrigger.create({
-    trigger: sec, start: 'top 50%', end: 'bottom 50%',
-    onToggle: s => { if (s.isActive) { sideIdx.textContent = String(i + 1).padStart(2, '0'); sideName.dataset.text = sec.dataset.section; scramble(sideName); } },
-  });
-});
+// generic reveal
+gsap.utils.toArray('.rv').forEach(el => gsap.fromTo(el, { y: 60, opacity: 0 }, {
+  y: 0, opacity: 1, duration: 1.2, ease: 'expo.out', clearProps: 'transform', scrollTrigger: { trigger: el, start: 'top 90%' },
+}));
 
+// counters
 document.querySelectorAll('[data-count]').forEach(el => {
-  const o = { v: 0 };
-  ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true,
-    onEnter: () => gsap.to(o, { v: +el.dataset.count, duration: 2, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(o.v) }) });
+  const o = { v: 0 }, n = +el.dataset.count; el.textContent = '0';
+  ScrollTrigger.create({ trigger: el, start: 'top 92%', once: true,
+    onEnter: () => gsap.to(o, { v: n, duration: 2, ease: 'power3.out', onUpdate: () => el.textContent = Math.round(o.v) }) });
 });
+gsap.fromTo('.stat', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: '.stats', start: 'top 88%' } });
 
-document.querySelectorAll('[data-scramble]').forEach(el => {
-  if (el === sideName) return;
-  ScrollTrigger.create({ trigger: el, start: 'top 88%', onEnter: () => scramble(el) });
-});
-
-if (!reduce) {
-  // hero parallax out
-  const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-  gsap.to('.hero-title .line:nth-child(1)', { xPercent: -10, ease: 'none', scrollTrigger: heroST });
-  gsap.to('.hero-title .line:nth-child(2)', { xPercent: 8, ease: 'none', scrollTrigger: heroST });
-  gsap.to('.hero .wrap', { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: heroST });
-  gsap.to('.hud, .scroll-hint', { opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '30% top' } });
-
-  gsap.utils.toArray('.reveal').forEach(el => gsap.from(el, {
-    y: 50, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%' },
-  }));
-
-  gsap.from('.card', {
-    y: 120, rotateX: -35, opacity: 0, duration: 1.4, ease: 'expo.out', stagger: { each: 0.1, grid: 'auto' },
-    transformOrigin: '50% 0%', scrollTrigger: { trigger: '.cards', start: 'top 82%' },
+// stacked service cards
+const svcs = gsap.utils.toArray('.svc');
+svcs.forEach((svc, i) => {
+  const card = svc.querySelector('.svc-card');
+  gsap.fromTo(card, { y: 120, rotateX: -12, opacity: 0 }, { y: 0, rotateX: 0, opacity: 1, duration: 1.3, ease: 'expo.out', transformPerspective: 1600, scrollTrigger: { trigger: svc, start: 'top 92%' } });
+  const next = svcs[i + 1];
+  if (!next) return;
+  gsap.fromTo(card, { scale: 1, filter: 'brightness(1)' }, {
+    scale: 0.9 + i * 0.012, filter: 'brightness(0.45)', ease: 'none', immediateRender: false,
+    scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 20%', scrub: true },
   });
-
-  gsap.from('.stat', { y: 40, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out', scrollTrigger: { trigger: '.stats', start: 'top 90%' } });
-
-  gsap.fromTo('.cta-title', { scale: 0.75, opacity: 0.15, rotateX: 30 }, {
-    scale: 1, opacity: 1, rotateX: 0, ease: 'none',
-    scrollTrigger: { trigger: '.cta', start: 'top bottom', end: 'top 20%', scrub: true },
-  });
-  gsap.fromTo('.f-big', { yPercent: 40 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: 'footer', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-}
-
-/* ================= boot sequence ================= */
-const loader = document.querySelector('.loader');
-const count = loader.querySelector('.loader-count');
-const lbar = loader.querySelector('.loader-bar span');
-const boot = { p: 0 };
-gsap.to(boot, {
-  p: 100, duration: reduce ? 0.3 : 1.6, ease: 'power2.inOut',
-  onUpdate: () => { count.textContent = String(Math.round(boot.p)).padStart(3, '0'); lbar.style.transform = `scaleX(${boot.p / 100})`; },
-  onComplete: () => {
-    gsap.to(loader, { yPercent: -100, duration: reduce ? 0.3 : 1.1, ease: 'expo.inOut', onComplete: () => loader.remove() });
-    document.body.classList.remove('loading');
-    lenis?.start();
-    gsap.to(st, { intro: 1, duration: reduce ? 0.3 : 2.4, ease: 'expo.out', delay: 0.3 });
-    if (reduce) return;
-    const tl = gsap.timeline({ delay: 0.45 });
-    tl.from('.hero-title .char', { yPercent: 115, rotateX: -85, opacity: 0, duration: 1.3, stagger: 0.03, ease: 'expo.out' })
-      .from('.tag, .hero-sub, .hero-ctas > *', { y: 30, opacity: 0, duration: 1, stagger: 0.08, ease: 'expo.out' }, '-=1')
-      .from('.nav > *, .hud-item, .scroll-hint, .side-hud', { opacity: 0, y: -10, duration: 0.8, stagger: 0.05 }, '-=0.9');
-    ScrollTrigger.refresh();
-  },
 });
+gsap.utils.toArray('.svc-vis .big').forEach(b => gsap.fromTo(b, { yPercent: 25 }, { yPercent: -15, ease: 'none', scrollTrigger: { trigger: b.closest('.svc'), start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+// marquee with scroll velocity
+const rows = [...document.querySelectorAll('.mq-row')].map(row => {
+  const inner = row.querySelector('.mq-in');
+  for (let k = 0; k < 3; k++) row.appendChild(inner.cloneNode(true));
+  return { row, dir: +row.dataset.dir, x: 0, w: inner.offsetWidth };
+});
+let vel = 0;
+ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => vel = s.getVelocity() });
+addEventListener('resize', () => rows.forEach(r => r.w = r.row.querySelector('.mq-in').offsetWidth));
+gsap.ticker.add(() => {
+  const boost = Math.min(Math.abs(vel) / 220, 14);
+  rows.forEach(r => {
+    r.x += r.dir * (0.6 + boost);
+    if (r.x <= -r.w) r.x += r.w; if (r.x > 0) r.x -= r.w;
+    r.row.style.transform = `translate3d(${r.x}px,0,0) skewX(${gsap.utils.clamp(-10, 10, -vel / 300) * r.dir}deg)`;
+  });
+  vel *= 0.92;
+});
+
+// projects
+gsap.fromTo('.pcard', { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.3, ease: 'expo.out', stagger: 0.12, clearProps: 'opacity,transform', scrollTrigger: { trigger: '.bento', start: 'top 85%' } });
+document.querySelectorAll('[data-par]').forEach(img => gsap.fromTo(img, { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: img.closest('.pcard'), start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+// manifesto lights word by word
+gsap.to(man.querySelectorAll('.mw'), { opacity: 1, stagger: 0.05, ease: 'none', scrollTrigger: { trigger: man, start: 'top 80%', end: 'bottom 45%', scrub: true } });
+gsap.fromTo('.pillar', { y: 80, opacity: 0 }, { y: 0, opacity: 1, clearProps: 'transform', duration: 1.2, ease: 'expo.out', stagger: 0.12, scrollTrigger: { trigger: '.pillars', start: 'top 88%' } });
+
+// timeline progress
+gsap.to('.tl-line i', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.tl', start: 'top 70%', end: 'bottom 60%', scrub: true } });
+gsap.utils.toArray('.tl-year').forEach(y => gsap.fromTo(y, { xPercent: -12, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: y, start: 'top 88%' } }));
+
+// footer
+gsap.fromTo('.f-big', { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.6, ease: 'expo.out', scrollTrigger: { trigger: 'footer', start: 'top 85%' } });
+
+addEventListener('load', () => ScrollTrigger.refresh());
+})();
 </script>
 </body>
 </html>
