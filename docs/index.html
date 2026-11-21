@@ -89,8 +89,8 @@ button,input,textarea{font:inherit;color:inherit}
 .brand:hover .emark{transform:translateX(3px) skewX(-6deg)}
 .brand-sep{width:1px;height:30px;background:var(--line-2)}
 .brand-txt{display:flex;flex-direction:column;line-height:1}
-.brand-txt b{font-size:17px;font-weight:800;letter-spacing:.02em}
-.brand-txt span{font-size:11.5px;font-weight:400;letter-spacing:.06em;color:var(--muted);margin-top:3px}
+.brand-txt b{font-size:21px;font-weight:800;letter-spacing:.03em}
+.brand-txt span{font-size:13px;font-weight:400;letter-spacing:.05em;color:var(--muted);margin-top:4px}
 .nav-links{display:flex;gap:4px;position:relative}
 .nav-links a{position:relative;padding:10px 16px;font-size:14px;font-weight:500;color:var(--muted);transition:color .3s;border-radius:10px}
 .nav-links a:hover,.nav-links a.active{color:var(--fg)}
@@ -108,7 +108,7 @@ button,input,textarea{font:inherit;color:inherit}
 .mmenu .btn{margin-top:28px;align-self:flex-start;font-size:15px}
 
 /* ---------- buttons ---------- */
-.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border-radius:14px;font-size:15px;font-weight:600;letter-spacing:.01em;overflow:hidden;isolation:isolate;white-space:nowrap;transition:color .4s,border-color .4s,box-shadow .4s}
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;padding:17px 32px;border-radius:999px;font-size:15.5px;font-weight:600;letter-spacing:.01em;overflow:hidden;isolation:isolate;white-space:nowrap;transition:color .4s,border-color .4s,box-shadow .4s}
 .btn svg{width:18px;height:18px;transition:transform .45s var(--ease)}
 .btn:hover svg{transform:translateX(4px)}
 .btn-or{background:var(--or);color:#fff;box-shadow:0 10px 40px -12px rgba(255,106,0,.8),inset 0 1px 0 rgba(255,255,255,.3)}
@@ -119,7 +119,7 @@ button,input,textarea{font:inherit;color:inherit}
 .btn-gh::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fg);transform:translateY(101%);transition:transform .55s var(--ease)}
 .btn-gh:hover{color:#000;border-color:var(--fg)}
 .btn-gh:hover::before{transform:none}
-.btn-sm{padding:12px 20px;font-size:14px;border-radius:12px}
+.btn-sm{padding:12px 22px;font-size:14px}
 
 /* ---------- common ---------- */
 section{position:relative}
@@ -137,7 +137,7 @@ section{position:relative}
 .spot>*{position:relative;z-index:1}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tags span{font-size:12px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);color:var(--muted);background:rgba(255,255,255,.02)}
-.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .04em .18em;margin:-.16em -.04em -.18em}
 .wi{display:inline-block;will-change:transform}
 
 /* ---------- hero ---------- */
@@ -145,24 +145,10 @@ section{position:relative}
 .hero .wrap{position:relative}
 .hero-tag{display:inline-flex;align-items:center;gap:16px;font-size:12px;font-weight:700;letter-spacing:.42em;color:var(--fg)}
 .hero-tag::before{content:"";width:46px;height:2px;background:var(--or);border-radius:2px}
-.hero h1{font-size:clamp(46px,8.4vw,128px);font-weight:800;line-height:.98;letter-spacing:-.045em;margin-top:30px;max-width:12ch}
-.hero h1 .or{background:linear-gradient(100deg,var(--or) 20%,var(--or-2) 60%,var(--peach));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-sub{margin-top:30px;font-size:clamp(16px,1.5vw,21px);color:var(--muted);max-width:46ch}
+.hero h1{font-size:clamp(40px,5.1vw,92px);font-weight:800;line-height:1.08;letter-spacing:-.035em;margin-top:30px}
+.hero h1 .or{color:var(--or)}
+.hero-sub{margin-top:30px;font-size:clamp(16px,1.55vw,22px);color:rgba(247,244,241,.86);max-width:42ch}
 .hero-ctas{margin-top:42px;display:flex;flex-wrap:wrap;gap:14px}
-.chips{position:absolute;inset:0;pointer-events:none}
-.chip{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:16px;font-size:13px;font-weight:600;white-space:nowrap}
-.chip .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,106,0,.14);color:var(--or)}
-.chip .ic svg{width:18px;height:18px}
-.chip small{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.02em}
-.chip-1{right:4%;top:2%}
-.chip-2{right:22%;top:44%}
-.chip-3{right:2%;top:70%}
-.live{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.scroll-hint{position:absolute;left:var(--pad);bottom:34px;display:flex;align-items:center;gap:14px;font-size:11px;font-weight:700;letter-spacing:.3em;color:var(--dim)}
-.scroll-hint .m{width:22px;height:34px;border:1.5px solid var(--line-2);border-radius:12px;position:relative}
-.scroll-hint .m::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--or);animation:wheel 1.8s var(--ease) infinite}
-@keyframes wheel{0%{transform:translateY(0);opacity:1}80%{transform:translateY(10px);opacity:0}100%{opacity:0}}
 
 /* ---------- stats ---------- */
 .stats{padding:0 0 clamp(90px,12vw,150px)}
@@ -339,12 +325,11 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
   .nav-links a{padding:10px 11px}
-  .chip-2{display:none}
 }
 @media (max-width:980px){
   .nav-links,.nav .nav-cta{display:none}
   .burger{display:block}
-  .chips{display:none}
+  .br-d{display:none}
   .svc-card{grid-template-columns:1fr;min-height:0}
   .svc-vis{min-height:200px;order:-1}
   .p-feat{grid-template-columns:1fr}
@@ -368,7 +353,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
   .svc{top:calc(90px + var(--i) * 10px)}
   .hero{padding:120px 0 110px}
   .hero-ctas .btn{flex:1 1 auto;justify-content:center}
-  .brand-txt span{display:none}
   .hero-tag{letter-spacing:.24em;font-size:11px;gap:12px}
   .hero-tag::before{width:30px}
   .c-item{gap:14px;padding:14px}
@@ -415,8 +399,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
 
 <header class="nav">
   <a href="#inicio" class="brand" aria-label="EMERICH Tech Solution — início">
-    <svg class="emark" viewBox="0 0 140 90" aria-hidden="true"><use href="#emark"/></svg>
-    <span class="brand-sep" aria-hidden="true"></span>
     <span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span>
   </a>
   <nav class="nav-links" aria-label="Principal">
@@ -443,14 +425,9 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
   <!-- HERO -->
   <section class="hero" id="inicio" data-section="INÍCIO">
     <div class="wrap">
-      <div class="chips" aria-hidden="true">
-        <div class="chip glass chip-1" data-depth="1.4"><span class="live"></span><div>Disponível para novos projetos<small>Resposta em até 24h</small></div></div>
-        <div class="chip glass chip-2" data-depth="2.4"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></svg></span><div>Automações &amp; integrações<small>APIs · ERP · pagamentos</small></div></div>
-        <div class="chip glass chip-3" data-depth="1.8"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><div>Sistemas sob medida<small>Web · desktop · mobile</small></div></div>
-      </div>
       <div class="hero-tag">TECNOLOGIA PARA EMPRESAS</div>
       <h1 class="hero-title">
-        <span class="w"><span class="wi">Soluções</span></span> <span class="w"><span class="wi">tecnológicas</span></span>
+        <span class="w"><span class="wi">Soluções</span></span> <span class="w"><span class="wi">tecnológicas</span></span><br class="br-d">
         <span class="w"><span class="wi">para</span></span> <span class="w"><span class="wi">o</span></span> <span class="w"><span class="wi">seu</span></span> <span class="w"><span class="wi or">negócio.</span></span>
       </h1>
       <p class="hero-sub">Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados.</p>
@@ -459,7 +436,6 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
         <a class="btn btn-gh magnetic" href="#projetos"><span>Ver projetos</span></a>
       </div>
     </div>
-    <div class="scroll-hint" aria-hidden="true"><span class="m"></span>ROLE PARA EXPLORAR</div>
   </section>
 
   <!-- STATS -->
@@ -807,7 +783,7 @@ const loaderNum = document.querySelector('.loader-num'), loaderBar = document.qu
 const heroWords = document.querySelectorAll('.hero .wi');
 if (hasGsap && !reduce) {
   gsap.set(heroWords, { yPercent: 110, rotate: 4 });
-  gsap.set('.hero-tag, .hero-sub, .hero-ctas, .chip, .scroll-hint', { opacity: 0, y: 30 });
+  gsap.set('.hero-tag, .hero-sub, .hero-ctas', { opacity: 0, y: 30 });
 }
 const t0 = performance.now(), LOAD_MS = reduce ? 200 : 1500;
 function loadTick(now) {
@@ -823,9 +799,7 @@ function intro() {
   const tl = gsap.timeline({ delay: 0.35 });
   tl.to(heroWords, { yPercent: 0, rotate: 0, duration: 1.3, ease: 'expo.out', stagger: 0.07 })
     .to('.hero-tag', { opacity: 1, y: 0, duration: 1, ease: 'expo.out' }, 0.1)
-    .to('.hero-sub, .hero-ctas', { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1 }, 0.55)
-    .to('.chip', { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.12 }, 0.75)
-    .to('.scroll-hint', { opacity: 1, y: 0, duration: 1 }, 1);
+    .to('.hero-sub, .hero-ctas', { opacity: 1, y: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1 }, 0.55);
 }
 
 /* ================= WebGL ribbons ================= */
@@ -837,37 +811,71 @@ const bgState = { s: 0, h: 1, mx: 0, my: 0 };
   const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const fs = `precision highp float;
 uniform vec2 R;uniform float T;uniform vec2 M;uniform float S;uniform float H;
+const float PI=3.14159265;
 float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-float ribbon(vec2 p,vec2 c,float r,float bw){
-  float d=abs(length(p-c)-r);
-  float edge=.0021/(abs(d-bw)+.0013);
-  float fill=smoothstep(bw,0.,d);
-  float core=.0035/(d+.0035);
-  return edge*.5+fill*.26+core*.24;
+// Signed distance to an "elbow": a diagonal stroke rising from the bottom-left (angle th)
+// that bends with radius r into a horizontal stroke leaving to the right. Positive = outer side.
+float elbow(vec2 p,vec2 C,float r,float th){
+  vec2 d=vec2(-cos(th),-sin(th));
+  float t=r*tan(th*.5);
+  vec2 T1=C+d*t,T2=C+vec2(t,0.),O=T2-vec2(0.,r);
+  float best=1e3,sd=1e3;
+  if(p.x>=T2.x){float v=p.y-C.y;if(abs(v)<best){best=abs(v);sd=v;}}
+  vec2 q=p-T1;
+  if(dot(q,d)>=0.){float v=dot(q,vec2(-sin(th),cos(th)));if(abs(v)<best){best=abs(v);sd=v;}}
+  vec2 o=p-O;float a=atan(o.y,o.x);
+  if(a>=PI*.5&&a<=PI*.5+th){float v=length(o)-r;if(abs(v)<best){best=abs(v);sd=v;}}
+  if(best>=1e3)sd=-min(length(p-T1),length(p-T2));
+  return sd;
+}
+vec3 band(vec2 p,float sd,float hw,float fillK,float edgeK,float T){
+  float a=abs(sd);
+  float inside=smoothstep(hw+.002,hw-.002,a);
+  float across=clamp(sd/hw*.5+.5,0.,1.);
+  vec3 fill=mix(vec3(.22,.035,0.),vec3(1.,.36,0.),pow(across,1.6))*inside*fillK;
+  float eo=min(.0018/(abs(sd-hw)+.0016),1.6);
+  float ei=min(.0008/(abs(sd+hw)+.002),1.);
+  float halo=exp(-max(sd-hw,0.)*14.)*step(hw,sd);
+  float flow=pow(.5+.5*sin((p.x*1.4-p.y)*6.-T*1.2),12.);
+  vec3 c=fill;
+  c+=vec3(1.,.4,0.)*(eo*(.9+.7*flow)+ei*.4+halo*.22)*edgeK;
+  c+=vec3(1.,.78,.55)*pow(eo/1.6,4.)*.9*edgeK;
+  return c;
 }
 void main(){
   vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;
   float A=R.x/R.y*.5;
-  vec2 p=uv-M*.03;
-  vec2 c=vec2(A+.3,-1.08)+vec2(-.42,.26)*S+vec2(.02*sin(T*.21),.015*cos(T*.17));
-  float I=0.;
-  for(int i=0;i<3;i++){
-    float fi=float(i);
-    float r=1.+fi*.21+.012*sin(T*.45+fi*1.9)+.06*S;
-    I+=(1.-fi*.23)*ribbon(p,c,r,.05-.008*fi);
-  }
-  vec2 c2=vec2(-A-.9,1.55)+vec2(.3,-.2)*S;
-  I+=.28*ribbon(p,c2,1.45+.01*sin(T*.3),.035);
-  vec3 orc=vec3(1.,.415,0.);
-  vec3 col=orc*I*.85+vec3(1.,.82,.62)*pow(max(I-1.2,0.),2.)*.12;
-  col+=orc*.10*exp(-length(p-vec2(A*.6,-.35))*1.6);
+  float k=clamp(A/.8,.7,1.);
+  vec2 off=vec2(A<.6?.1:max(0.,A-.8)*1.1,A<.6?-.3:0.);
+  vec2 p=(uv-off-M*vec2(.016,.01))/k;
+  p+=vec2(-.05,.2)*S;
+  float ax=A/k;
+  float th=1.15;
+  vec3 col=vec3(0.);
+  // top stroke: bright neon edge over a glowing band that fades inward
+  float s1=elbow(p,vec2(ax-.40,.22),.30,th);
+  col+=band(p,s1,.07,.55,1.,T);
+  // middle stroke: solid ribbon
+  float hw2=.062;
+  vec2 C2=vec2(ax-.27,-.04);
+  float s2=elbow(p,C2,.2,th);
+  col+=band(p,s2,hw2,1.,1.,T+1.7);
+  // bottom bar: starts at the inner edge of the middle stroke
+  float y3=-.27,hw3=.07;
+  vec2 d2=vec2(-cos(th),-sin(th));
+  vec2 T12=C2+d2*(.2*tan(th*.5));
+  float xs=T12.x+(y3-hw3-T12.y)*cos(th)/sin(th)+hw2/sin(th)+.01;
+  float s3=p.y-(y3-hw3);
+  float gate=smoothstep(xs-.008,xs+.02,p.x);
+  col+=band(p,s3,hw3,.42,.8,T+3.1)*gate;
+  // soft ambient light around the strokes
+  col+=vec3(1.,.38,0.)*.07*exp(-abs(s2)*5.);
   vec2 mu=vec2(M.x*A,M.y*.5);
-  col+=orc*.06*exp(-length(uv-mu)*4.5);
-  col=1.-exp(-col*1.35);
-  col*=smoothstep(1.45,.15,length(uv*vec2(.75/max(A,.5),1.15)));
+  col+=vec3(1.,.4,0.)*.04*exp(-length(uv-mu)*4.5);
+  col=min(col,vec3(1.));
   col*=H;
-  col+=vec3(.018,.016,.015);
-  col+=(hash(gl_FragCoord.xy+fract(T*.7)*91.)-.5)*.03;
+  col+=vec3(.014,.012,.011);
+  col+=(hash(gl_FragCoord.xy+fract(T*.7)*91.)-.5)*.026;
   gl_FragColor=vec4(col,1.);
 }`;
   const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; };
@@ -895,7 +903,7 @@ void main(){
     const s = max > 0 ? scrollY / max : 0;
     bgState.s += (s - bgState.s) * 0.08;
     const heroK = Math.max(0, 1 - scrollY / (innerHeight * 0.9));
-    const target = 0.5 + 0.5 * heroK;
+    const target = 0.26 + 0.74 * heroK;
     bgState.h += (target - bgState.h) * 0.08;
     gl.uniform2f(uR, cv.width, cv.height);
     gl.uniform1f(uT, reduce ? 0 : now / 1000);
@@ -957,14 +965,6 @@ if (fine && !reduce) {
     });
     el.addEventListener('pointerleave', () => { el.style.transition = 'transform 1s cubic-bezier(.2,.8,.2,1)'; el.style.transform = ''; });
   });
-  // hero chips follow the mouse at different depths
-  const chips = [...document.querySelectorAll('.chip')];
-  let cx = 0, cy = 0;
-  (function chipLoop() {
-    cx += (mouse.nx - cx) * 0.06; cy += (mouse.ny - cy) * 0.06;
-    chips.forEach(c => { const d = +c.dataset.depth; c.style.translate = `${cx * d * -14}px ${cy * d * 12}px`; });
-    requestAnimationFrame(chipLoop);
-  })();
 }
 
 /* ================= project filters ================= */
@@ -1046,13 +1046,6 @@ const man = document.querySelector('[data-words]');
 if (!hasGsap || reduce) return;
 const progress = document.querySelector('.progress i');
 ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => progress.style.transform = `scaleX(${s.progress})` });
-
-// hero exit
-const heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
-gsap.to('.hero-title', { yPercent: -18, scale: 0.94, opacity: 0.1, filter: 'blur(6px)', transformOrigin: '0 0', ease: 'none', scrollTrigger: heroST });
-gsap.to('.hero-sub, .hero-ctas, .hero-tag', { y: -60, opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '60% top' } });
-gsap.to('.chips', { y: -140, ease: 'none', scrollTrigger: heroST });
-gsap.to('.scroll-hint', { opacity: 0, ease: 'none', scrollTrigger: { ...heroST, end: '20% top' } });
 
 // generic reveal
 gsap.utils.toArray('.rv').forEach(el => gsap.fromTo(el, { y: 60, opacity: 0 }, {
