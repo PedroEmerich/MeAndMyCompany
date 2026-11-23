@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF6A00'/%3E%3Cg fill='%23fff' transform='translate(16 14) skewX(-20)'%3E%3Crect x='6' width='32' height='9' rx='1'/%3E%3Crect x='6' y='14.5' width='24' height='8' rx='1'/%3E%3Crect x='6' y='28' width='32' height='9' rx='1'/%3E%3Crect x='6' width='9' height='37' rx='1'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#050505;--bg-2:#0c0c0d;--fg:#f7f4f1;--muted:rgba(247,244,241,.64);--dim:rgba(247,244,241,.4);
@@ -20,6 +20,7 @@
   --or:#FF6A00;--or-2:#FF8A2B;--peach:#FFD6B8;
   --glass:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
   --pad:clamp(20px,4.5vw,64px);--max:1320px;
+  --m:calc(min(100vw,177.804vh)/1506);
   --ease:cubic-bezier(.2,.8,.2,1);
   color-scheme:dark;
 }
@@ -27,7 +28,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
-body{background:var(--bg);color:var(--fg);font-family:'Montserrat',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--fg);font-family:'Figtree',system-ui,sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button,input,textarea{font:inherit;color:inherit}
@@ -46,14 +47,10 @@ button,input,textarea{font:inherit;color:inherit}
 .loader{position:fixed;inset:0;z-index:200;background:#030303;display:grid;place-items:center;transition:clip-path 1.1s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0 0)}
 .loaded .loader{clip-path:inset(0 0 100% 0);pointer-events:none}
 .loader-in{display:flex;flex-direction:column;align-items:center;gap:28px}
-.loader .emark{width:96px;height:auto}
-.loader .emark rect{transform-box:fill-box;transform-origin:left;animation:barIn .9s var(--ease) both}
-.loader .emark rect:nth-child(2){animation-delay:.12s}
-.loader .emark rect:nth-child(3){animation-delay:.24s}
-.loader .emark rect:nth-child(4){animation-delay:.36s;transform-origin:top}
-@keyframes barIn{from{transform:scaleX(0)}to{transform:none}}
-.loader .emark rect:nth-child(4){animation-name:stemIn}
-@keyframes stemIn{from{transform:scaleY(0)}to{transform:none}}
+.loader .emark{width:92px;height:auto}
+.loader .emark .lp{animation:logoIn 1s var(--ease) both}
+.loader .emark .lp+.lp{animation-delay:.15s}
+@keyframes logoIn{from{opacity:0;transform:translate(-14px,10px)}to{opacity:1;transform:none}}
 .loader-meta{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:600;letter-spacing:.32em;color:var(--dim)}
 .loader-num{color:var(--fg);font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
 .loader-bar{width:180px;height:2px;background:var(--line-2);border-radius:2px;overflow:hidden}
@@ -80,29 +77,29 @@ button,input,textarea{font:inherit;color:inherit}
 .side-hud b{color:var(--or);font-weight:700}
 .side-hud i{width:1px;height:46px;background:var(--line-2)}
 
-/* ---------- nav ---------- */
-.nav{position:fixed;top:16px;left:50%;z-index:100;width:min(calc(100% - 28px),1240px);transform:translateX(-50%);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 10px 10px 22px;border-radius:18px;border:1px solid transparent;transition:background .5s,border-color .5s,backdrop-filter .5s,transform .6s var(--ease)}
-.nav.scrolled{background:rgba(10,10,11,.55);border-color:var(--line);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
-.nav.hide{transform:translate(-50%,-140%)}
-.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.brand .emark{width:38px;height:auto;transition:transform .6s var(--ease)}
-.brand:hover .emark{transform:translateX(3px) skewX(-6deg)}
-.brand-sep{width:1px;height:30px;background:var(--line-2)}
-.brand-txt{display:flex;flex-direction:column;line-height:1}
-.brand-txt b{font-size:21px;font-weight:800;letter-spacing:.03em}
-.brand-txt span{font-size:13px;font-weight:400;letter-spacing:.05em;color:var(--muted);margin-top:4px}
-.nav-links{display:flex;gap:4px;position:relative}
-.nav-links a{position:relative;padding:10px 16px;font-size:14px;font-weight:500;color:var(--muted);transition:color .3s;border-radius:10px}
-.nav-links a:hover,.nav-links a.active{color:var(--fg)}
-.nav-ind{position:absolute;bottom:2px;height:2px;border-radius:2px;background:var(--or);transition:left .5s var(--ease),width .5s var(--ease),opacity .3s;opacity:0;pointer-events:none}
-.nav-cta{display:inline-flex;align-items:center;gap:10px}
-.burger{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);position:relative}
+/* ---------- nav (laid out on the mockup grid) ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:calc(130*var(--m));transition:background .5s,backdrop-filter .5s,transform .6s var(--ease),border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(8,8,9,.62);border-color:var(--line);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+.nav.hide{transform:translateY(-100%)}
+.brand{position:absolute;left:calc(92*var(--m));top:calc(45*var(--m));display:flex;align-items:flex-start}
+.brand .emark{width:calc(82*var(--m));height:calc(66*var(--m));display:block}
+.brand-sep{width:calc(2*var(--m));height:calc(64*var(--m));margin-left:calc(21*var(--m));background:rgba(255,255,255,.85)}
+.brand-txt{position:relative;margin-left:calc(26*var(--m));width:calc(210*var(--m));height:calc(66*var(--m));font-family:'Montserrat',sans-serif;line-height:1;white-space:nowrap}
+.brand-txt b{position:absolute;left:calc(-4*var(--m));top:calc(-6.2*var(--m));font-size:calc(43*var(--m));font-weight:600;letter-spacing:.005em}
+.brand-txt span{position:absolute;left:0;top:calc(41.8*var(--m));font-size:calc(25.9*var(--m));font-weight:400;letter-spacing:.01em;color:rgba(255,255,255,.88)}
+.nav-links{position:absolute;right:calc(314*var(--m));top:0;height:calc(100*var(--m));display:flex;gap:calc(75*var(--m))}
+.nav-links a{display:block;padding-top:calc(53.2*var(--m));font-size:calc(21.95*var(--m));font-weight:500;line-height:1;color:#fff;transition:color .3s}
+.nav-links a:hover{color:var(--peach)}
+.nav-ind{position:absolute;top:calc(91*var(--m));height:calc(3*var(--m));border-radius:3px;background:var(--or);transition:left .5s var(--ease),width .5s var(--ease),opacity .3s;opacity:0;pointer-events:none}
+.nav-contact{position:absolute;right:calc(66*var(--m));top:calc(35*var(--m));width:calc(174*var(--m));height:calc(59*var(--m));display:grid;place-items:center;border:calc(2.6*var(--m)) solid var(--or);border-radius:999px;font-size:calc(21.4*var(--m));font-weight:500;color:#fff;transition:background .4s,color .4s,box-shadow .4s}
+.nav-contact:hover{background:var(--or);box-shadow:0 10px 40px -10px rgba(255,106,0,.9)}
+.burger{display:none;position:absolute;right:16px;top:14px;width:46px;height:46px;border-radius:12px;border:1px solid var(--line-2);background:rgba(255,255,255,.04)}
 .burger i{position:absolute;left:13px;right:13px;height:2px;background:var(--fg);border-radius:2px;transition:transform .5s var(--ease),top .5s var(--ease)}
 .burger i:nth-child(1){top:17px}.burger i:nth-child(2){top:26px}
 .menu-open .burger i:nth-child(1){top:22px;transform:rotate(45deg)}
 .menu-open .burger i:nth-child(2){top:22px;transform:rotate(-45deg)}
-.mmenu{position:fixed;inset:0;z-index:90;background:rgba(5,5,5,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;padding:100px var(--pad) 40px;gap:6px;clip-path:circle(0 at calc(100% - 44px) 40px);transition:clip-path .8s cubic-bezier(.76,0,.24,1);visibility:hidden}
-.menu-open .mmenu{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible}
+.mmenu{position:fixed;inset:0;z-index:90;background:rgba(5,5,5,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);display:flex;flex-direction:column;justify-content:center;padding:100px var(--pad) 40px;gap:6px;clip-path:circle(0 at calc(100% - 39px) 37px);transition:clip-path .8s cubic-bezier(.76,0,.24,1);visibility:hidden}
+.menu-open .mmenu{clip-path:circle(150% at calc(100% - 39px) 37px);visibility:visible}
 .mmenu a{font-size:clamp(34px,10vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.15;display:flex;align-items:baseline;gap:14px}
 .mmenu a small{font-size:12px;font-weight:600;color:var(--or);letter-spacing:.2em}
 .mmenu .btn{margin-top:28px;align-self:flex-start;font-size:15px}
@@ -140,15 +137,20 @@ section{position:relative}
 .w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .04em .18em;margin:-.16em -.04em -.18em}
 .wi{display:inline-block;will-change:transform}
 
-/* ---------- hero ---------- */
-.hero{min-height:100svh;display:flex;align-items:center;padding:140px 0 120px;overflow:hidden}
-.hero .wrap{position:relative}
-.hero-tag{display:inline-flex;align-items:center;gap:16px;font-size:12px;font-weight:700;letter-spacing:.42em;color:var(--fg)}
-.hero-tag::before{content:"";width:46px;height:2px;background:var(--or);border-radius:2px}
-.hero h1{font-size:clamp(40px,5.1vw,92px);font-weight:800;line-height:1.08;letter-spacing:-.035em;margin-top:30px}
+/* ---------- hero (laid out on the mockup grid) ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:calc(847*var(--m));overflow:hidden}
+.stage{position:absolute;left:0;right:0;top:50%;height:calc(847*var(--m));transform:translateY(-50%)}
+.stage>*{position:absolute;margin:0}
+.hero-tag{left:calc(166*var(--m));top:calc(215.8*var(--m));font-size:calc(18.6*var(--m));font-weight:500;line-height:1;letter-spacing:.469em;color:#fff;white-space:nowrap}
+.hero-tag::before{content:"";position:absolute;left:calc(-73*var(--m));top:calc(7.4*var(--m));width:calc(49*var(--m));height:calc(3*var(--m));background:var(--or)}
+.hero h1{left:calc(92*var(--m));top:calc(286.6*var(--m));font-size:calc(88.9*var(--m));font-weight:800;line-height:.866;letter-spacing:-.012em;white-space:nowrap}
 .hero h1 .or{color:var(--or)}
-.hero-sub{margin-top:30px;font-size:clamp(16px,1.55vw,22px);color:rgba(247,244,241,.86);max-width:42ch}
-.hero-ctas{margin-top:42px;display:flex;flex-wrap:wrap;gap:14px}
+.hero-sub{left:calc(98*var(--m));top:calc(483.5*var(--m));font-size:calc(28.4*var(--m));font-weight:400;line-height:1.335;color:rgba(255,255,255,.9);white-space:nowrap}
+.hero-ctas{left:0;top:0}
+.hero-ctas .btn{position:absolute;padding:0;justify-content:center;font-size:calc(24.1*var(--m));font-weight:700;letter-spacing:0}
+.hero-ctas .btn-or{left:calc(93*var(--m));top:calc(650*var(--m));width:calc(411*var(--m));height:calc(75*var(--m));gap:calc(22*var(--m));box-shadow:0 calc(14*var(--m)) calc(44*var(--m)) calc(-14*var(--m)) rgba(255,106,0,.75)}
+.hero-ctas .btn-or svg{width:calc(27*var(--m));height:calc(27*var(--m))}
+.hero-ctas .btn-gh{left:calc(544*var(--m));top:calc(651*var(--m));width:calc(238*var(--m));height:calc(71*var(--m));border:calc(2.4*var(--m)) solid rgba(255,255,255,.92);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 
 /* ---------- stats ---------- */
 .stats{padding:0 0 clamp(90px,12vw,150px)}
@@ -313,6 +315,12 @@ a.c-item:hover{border-color:rgba(255,106,0,.5);background:rgba(255,106,0,.05)}
 /* ---------- footer ---------- */
 footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;overflow:hidden;background:linear-gradient(180deg,rgba(5,5,5,.4),#050505 60%)}
 .ft{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+footer .brand{position:static;align-items:center}
+footer .brand .emark{width:50px;height:40px}
+footer .brand-sep{width:1.5px;height:40px;margin-left:13px}
+footer .brand-txt{margin-left:15px;width:auto;height:auto}
+footer .brand-txt b{position:static;display:block;font-size:24px}
+footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top:3px}
 .ft p{margin-top:18px;color:var(--muted);font-size:14.5px;max-width:36ch}
 .ft h4{font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--dim)}
 .ft ul{list-style:none;margin-top:16px;display:grid;gap:10px}
@@ -323,13 +331,28 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
 .f-bottom{margin-top:34px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--dim);letter-spacing:.04em}
 
 /* ---------- responsive ---------- */
-@media (max-width:1100px){
-  .nav-links a{padding:10px 11px}
-}
-@media (max-width:980px){
-  .nav-links,.nav .nav-cta{display:none}
+@media (max-width:899px){
+  .nav{height:74px}
+  .nav-links,.nav-contact{display:none}
   .burger{display:block}
-  .br-d{display:none}
+  .brand{left:20px;top:16px}
+  .brand .emark{width:50px;height:40px}
+  .brand-sep{width:1.5px;height:40px;margin-left:13px}
+  .brand-txt{margin-left:15px;width:auto;height:40px}
+  .brand-txt b{position:static;display:block;font-size:24px;margin-top:-1px}
+  .brand-txt span{position:static;display:block;font-size:14.5px;margin-top:3px}
+  .hero{height:auto;min-height:100svh}
+  .stage{position:relative;top:0;transform:none;height:auto;min-height:100svh;padding:clamp(120px,22vh,180px) var(--pad) 330px}
+  .stage>*{position:relative;left:auto!important;top:auto!important}
+  .hero-tag{display:inline-block;margin-left:44px;font-size:11.5px;letter-spacing:.3em}
+  .hero-tag::before{left:-44px;top:4.5px;width:30px;height:2px}
+  .hero h1{display:block;margin-top:22px;font-size:clamp(38px,10.4vw,64px);line-height:1.02;white-space:normal}
+  .hero-sub{display:block;margin-top:20px;font-size:clamp(16px,4.3vw,20px);line-height:1.5;white-space:normal}
+  .hero-sub br{display:none}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .hero-ctas .btn{position:relative;left:auto;top:auto;width:auto;height:auto;flex:1 1 auto;padding:16px 24px;font-size:16px}
+  .hero-ctas .btn-or,.hero-ctas .btn-gh{left:auto;top:auto;width:auto;height:auto}
+  .hero-ctas .btn-or svg{width:18px;height:18px}
   .svc-card{grid-template-columns:1fr;min-height:0}
   .svc-vis{min-height:200px;order:-1}
   .p-feat{grid-template-columns:1fr}
@@ -351,13 +374,8 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
   .f-grid{grid-template-columns:1fr}
   .ft{grid-template-columns:1fr}
   .svc{top:calc(90px + var(--i) * 10px)}
-  .hero{padding:120px 0 110px}
-  .hero-ctas .btn{flex:1 1 auto;justify-content:center}
-  .hero-tag{letter-spacing:.24em;font-size:11px;gap:12px}
-  .hero-tag::before{width:30px}
   .c-item{gap:14px;padding:14px}
   .c-item span{font-size:13px}
-  .nav{padding:8px 8px 8px 16px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -371,21 +389,14 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
   <defs>
     <linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A2B"/><stop offset="1" stop-color="#FF5A00"/></linearGradient>
   </defs>
-  <symbol id="emark" viewBox="0 0 140 90">
-    <g fill="url(#eg)" transform="translate(36 0) skewX(-22)">
-      <rect x="0" y="0" width="100" height="20" rx="2"/>
-      <rect x="0" y="35" width="74" height="20" rx="2"/>
-      <rect x="0" y="70" width="100" height="20" rx="2"/>
-      <rect x="0" y="0" width="22" height="90" rx="2"/>
-    </g>
-  </symbol>
+  <symbol id="emark" viewBox="6 5 82 66"><g fill="#FF6A00"><path d="M36 6H88L80 21H45L41 23L8 61H7V42L21 22L25 19L28 12Q31 6 36 6Z"/><path d="M45 30H85L75 43H42L35 54H83L74 69H8L18 54L23 50L26 46Z"/></g></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </svg>
 
 <div class="loader" aria-hidden="true">
   <div class="loader-in">
-    <svg class="emark" viewBox="0 0 140 90"><g fill="url(#eg)" transform="translate(36 0) skewX(-22)"><rect x="0" y="0" width="100" height="20" rx="2"/><rect x="0" y="35" width="74" height="20" rx="2"/><rect x="0" y="70" width="100" height="20" rx="2"/><rect x="0" y="0" width="22" height="90" rx="2"/></g></svg>
+    <svg class="emark" viewBox="6 5 82 66"><g fill="#FF6A00"><path class="lp" d="M36 6H88L80 21H45L41 23L8 61H7V42L21 22L25 19L28 12Q31 6 36 6Z"/><path class="lp" d="M45 30H85L75 43H42L35 54H83L74 69H8L18 54L23 50L26 46Z"/></g></svg>
     <div class="loader-bar"><i></i></div>
     <div class="loader-meta"><span>EMERICH TECH SOLUTION</span><span class="loader-num">0</span></div>
   </div>
@@ -399,17 +410,17 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
 
 <header class="nav">
   <a href="#inicio" class="brand" aria-label="EMERICH Tech Solution — início">
+    <svg class="emark" viewBox="0 0 82 66" aria-hidden="true"><use href="#emark"/></svg>
+    <span class="brand-sep" aria-hidden="true"></span>
     <span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span>
   </a>
   <nav class="nav-links" aria-label="Principal">
     <a href="#inicio">Início</a>
     <a href="#servicos">Serviços</a>
     <a href="#projetos">Projetos</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#contato">Contato</a>
     <span class="nav-ind" aria-hidden="true"></span>
   </nav>
-  <a class="btn btn-or btn-sm nav-cta magnetic" href="#contato"><span>Solicitar orçamento</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <a class="nav-contact magnetic" href="#contato">Contato</a>
   <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mmenu"><i></i><i></i></button>
 </header>
 <nav class="mmenu" id="mmenu" aria-label="Menu">
@@ -424,13 +435,13 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
 <main>
   <!-- HERO -->
   <section class="hero" id="inicio" data-section="INÍCIO">
-    <div class="wrap">
+    <div class="stage">
       <div class="hero-tag">TECNOLOGIA PARA EMPRESAS</div>
       <h1 class="hero-title">
-        <span class="w"><span class="wi">Soluções</span></span> <span class="w"><span class="wi">tecnológicas</span></span><br class="br-d">
+        <span class="w"><span class="wi">Soluções</span></span> <span class="w"><span class="wi">tecnológicas</span></span><br>
         <span class="w"><span class="wi">para</span></span> <span class="w"><span class="wi">o</span></span> <span class="w"><span class="wi">seu</span></span> <span class="w"><span class="wi or">negócio.</span></span>
       </h1>
-      <p class="hero-sub">Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados.</p>
+      <p class="hero-sub">Desenvolvimento de sistemas, automações e integrações<br> que otimizam processos, conectam operações<br> e geram mais resultados.</p>
       <div class="hero-ctas">
         <a class="btn btn-or magnetic" href="#servicos"><span>Conheça nossos serviços</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
         <a class="btn btn-gh magnetic" href="#projetos"><span>Ver projetos</span></a>
@@ -710,7 +721,7 @@ footer{position:relative;border-top:1px solid var(--line);padding:70px 0 34px;ov
   <div class="wrap">
     <div class="ft">
       <div>
-        <a href="#inicio" class="brand"><svg class="emark" viewBox="0 0 140 90" aria-hidden="true"><use href="#emark"/></svg><span class="brand-sep" aria-hidden="true"></span><span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span></a>
+        <a href="#inicio" class="brand"><svg class="emark" viewBox="0 0 82 66" aria-hidden="true"><use href="#emark"/></svg><span class="brand-sep" aria-hidden="true"></span><span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span></a>
         <p>Desenvolvimento de sistemas, automações e integrações que otimizam processos, conectam operações e geram mais resultados.</p>
       </div>
       <div><h4>NAVEGAÇÃO</h4><ul><li><a href="#servicos">Serviços</a></li><li><a href="#projetos">Projetos</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#contato">Contato</a></li></ul></div>
@@ -810,72 +821,71 @@ const bgState = { s: 0, h: 1, mx: 0, my: 0 };
   if (!gl) { root.classList.add('no-gl'); return; }
   const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const fs = `precision highp float;
-uniform vec2 R;uniform float T;uniform vec2 M;uniform float S;uniform float H;
+uniform vec2 R;uniform vec2 O;uniform float K;uniform float T;uniform vec2 M;uniform float H;
 const float PI=3.14159265;
 float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-// Signed distance to an "elbow": a diagonal stroke rising from the bottom-left (angle th)
-// that bends with radius r into a horizontal stroke leaving to the right. Positive = outer side.
+// Signed distance (y-up) to an "elbow": a diagonal edge rising from the bottom-left at angle th
+// that bends with radius r into a horizontal edge leaving to the right. Positive = outer (upper-left) side.
 float elbow(vec2 p,vec2 C,float r,float th){
   vec2 d=vec2(-cos(th),-sin(th));
   float t=r*tan(th*.5);
-  vec2 T1=C+d*t,T2=C+vec2(t,0.),O=T2-vec2(0.,r);
-  float best=1e3,sd=1e3;
+  vec2 T1=C+d*t,T2=C+vec2(t,0.),Oc=T2-vec2(0.,r);
+  float best=1e9,sd=1e9;
   if(p.x>=T2.x){float v=p.y-C.y;if(abs(v)<best){best=abs(v);sd=v;}}
   vec2 q=p-T1;
   if(dot(q,d)>=0.){float v=dot(q,vec2(-sin(th),cos(th)));if(abs(v)<best){best=abs(v);sd=v;}}
-  vec2 o=p-O;float a=atan(o.y,o.x);
+  vec2 o=p-Oc;float a=atan(o.y,o.x);
   if(a>=PI*.5&&a<=PI*.5+th){float v=length(o)-r;if(abs(v)<best){best=abs(v);sd=v;}}
-  if(best>=1e3)sd=-min(length(p-T1),length(p-T2));
+  if(best>=1e9)sd=-min(length(p-T1),length(p-T2));
   return sd;
 }
-vec3 band(vec2 p,float sd,float hw,float fillK,float edgeK,float T){
-  float a=abs(sd);
-  float inside=smoothstep(hw+.002,hw-.002,a);
-  float across=clamp(sd/hw*.5+.5,0.,1.);
-  vec3 fill=mix(vec3(.22,.035,0.),vec3(1.,.36,0.),pow(across,1.6))*inside*fillK;
-  float eo=min(.0018/(abs(sd-hw)+.0016),1.6);
-  float ei=min(.0008/(abs(sd+hw)+.002),1.);
-  float halo=exp(-max(sd-hw,0.)*14.)*step(hw,sd);
-  float flow=pow(.5+.5*sin((p.x*1.4-p.y)*6.-T*1.2),12.);
-  vec3 c=fill;
-  c+=vec3(1.,.4,0.)*(eo*(.9+.7*flow)+ei*.4+halo*.22)*edgeK;
-  c+=vec3(1.,.78,.55)*pow(eo/1.6,4.)*.9*edgeK;
-  return c;
-}
 void main(){
-  vec2 uv=(gl_FragCoord.xy-.5*R)/R.y;
-  float A=R.x/R.y*.5;
-  float k=clamp(A/.8,.7,1.);
-  vec2 off=vec2(A<.6?.1:max(0.,A-.8)*1.1,A<.6?-.3:0.);
-  vec2 p=(uv-off-M*vec2(.016,.01))/k;
-  p+=vec2(-.05,.2)*S;
-  float ax=A/k;
-  float th=1.15;
+  // mockup coordinates: x right, y down, 1506x847 frame
+  vec2 sp=vec2(gl_FragCoord.x,R.y-gl_FragCoord.y);
+  vec2 mp=(sp-O)/K-M*vec2(7.,5.);
+  float x=mp.x,y=mp.y;
+  vec2 P=vec2(x,-y);
+  vec3 orG=vec3(.9,.28,.012);
   vec3 col=vec3(0.);
-  // top stroke: bright neon edge over a glowing band that fades inward
-  float s1=elbow(p,vec2(ax-.40,.22),.30,th);
-  col+=band(p,s1,.07,.55,1.,T);
-  // middle stroke: solid ribbon
-  float hw2=.062;
-  vec2 C2=vec2(ax-.27,-.04);
-  float s2=elbow(p,C2,.2,th);
-  col+=band(p,s2,hw2,1.,1.,T+1.7);
-  // bottom bar: starts at the inner edge of the middle stroke
-  float y3=-.27,hw3=.07;
-  vec2 d2=vec2(-cos(th),-sin(th));
-  vec2 T12=C2+d2*(.2*tan(th*.5));
-  float xs=T12.x+(y3-hw3-T12.y)*cos(th)/sin(th)+hw2/sin(th)+.01;
-  float s3=p.y-(y3-hw3);
-  float gate=smoothstep(xs-.008,xs+.02,p.x);
-  col+=band(p,s3,hw3,.42,.8,T+3.1)*gate;
-  // soft ambient light around the strokes
-  col+=vec3(1.,.38,0.)*.07*exp(-abs(s2)*5.);
-  vec2 mu=vec2(M.x*A,M.y*.5);
-  col+=vec3(1.,.4,0.)*.04*exp(-length(uv-mu)*4.5);
-  col=min(col,vec3(1.));
-  col*=H;
-  col+=vec3(.014,.012,.011);
-  col+=(hash(gl_FragCoord.xy+fract(T*.7)*91.)-.5)*.026;
+  float shimmer=pow(.5+.5*sin(.011*(x+y*.8)-T*1.1),18.);
+
+  // 1) top line: thin neon line with a wide glow on its outer side, fading out down the diagonal
+  float s1=elbow(P,vec2(1143.5,-233.),297.,1.107);
+  float f1=smoothstep(660.,470.,y)*mix(1.,.8,smoothstep(1300.,1506.,x));
+  float a1=mix(1.05,.68,smoothstep(300.,450.,y));
+  float g1=s1>0.?(a1*exp(-s1/45.)+.17*exp(-s1/100.)):(.5*exp(s1/4.)+.06*exp(s1/40.));
+  col+=orG*g1*f1;
+  col+=vec3(1.,.66,.36)*exp(-abs(s1)/1.3)*(.75+.5*shimmer)*f1;
+
+  // 2) middle ribbon: solid band between an outer and an inner elbow
+  float so=elbow(P,vec2(1255.,-405.),40.,.805);
+  float si=elbow(P,vec2(1270.,-518.),60.,.88);
+  float inside=smoothstep(.9,-.9,so)*smoothstep(-.9,.9,si);
+  float t=clamp(-so/max(si-so,1.),0.,1.);
+  float dg=smoothstep(500.,600.,y);
+  float b=1.-mix(.55,.3,dg)*pow(t,mix(.75,1.6,dg));
+  b*=mix(1.,.9,smoothstep(640.,847.,y));
+  b*=mix(1.,mix(.6,.05,t),smoothstep(1280.,1506.,x));
+  col+=vec3(1.,.36*mix(1.,.85,t),0.)*b*inside*(1.+.18*shimmer);
+  col+=orG*(so>0.?(.35*exp(-so/30.)+.11*exp(-so/140.)):0.);
+  col+=vec3(1.,.6,.3)*exp(-abs(so)/1.4)*.28*smoothstep(300.,500.,y+x*.2);
+  col+=orG*(si<0.?.12*exp(si/12.):0.);
+
+  // 3) bottom bar with its bright top line
+  float bt=clamp((y-650.)/95.,0.,1.);
+  float bar=step(650.,y)*smoothstep(749.,741.,y)*pow(clamp((x-1040.)/260.,0.,1.),.8)*mix(1.,.45,smoothstep(1300.,1506.,x));
+  col+=vec3(1.,mix(.42,.28,bt),.01)*mix(1.,.6,bt)*bar;
+  float lm=smoothstep(1120.,1195.,x)*mix(1.,.75,smoothstep(1390.,1506.,x));
+  col+=vec3(1.,.95,.82)*exp(-abs(y-650.5)/1.1)*lm*(.85+.4*shimmer);
+  col+=orG*(y<650.?.35*exp(-(650.-y)/7.):0.)*lm;
+
+  // subtle cursor light
+  vec2 mu=vec2((M.x*.5+.5)*R.x,(.5-M.y*.5)*R.y);
+  col+=orG*.03*exp(-length(sp-mu)/(260.*K));
+
+  col=min(col,vec3(1.))*H;
+  col+=vec3(.028,.027,.027);
+  col+=(hash(gl_FragCoord.xy+fract(T*.7)*91.)-.5)*.022;
   gl_FragColor=vec4(col,1.);
 }`;
   const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return gl.getShaderParameter(o, gl.COMPILE_STATUS) ? o : null; };
@@ -888,7 +898,7 @@ void main(){
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const U = n => gl.getUniformLocation(pr, n);
-  const uR = U('R'), uT = U('T'), uM = U('M'), uS = U('S'), uH = U('H');
+  const uR = U('R'), uO = U('O'), uK = U('K'), uT = U('T'), uM = U('M'), uH = U('H');
   let scale = Math.min(devicePixelRatio, 1.5) * (innerWidth < 700 ? 0.8 : 1);
   const resize = () => { cv.width = Math.round(innerWidth * scale); cv.height = Math.round(innerHeight * scale); gl.viewport(0, 0, cv.width, cv.height); };
   resize(); addEventListener('resize', resize);
@@ -899,16 +909,21 @@ void main(){
     const dt = now - last; last = now;
     if (dt > 34 && scale > 0.6) { if (++slow > 40) { scale *= 0.8; resize(); slow = 0; } } else slow = Math.max(0, slow - 1);
     bgState.mx += (mouse.nx - bgState.mx) * 0.05; bgState.my += (mouse.ny - bgState.my) * 0.05;
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const s = max > 0 ? scrollY / max : 0;
-    bgState.s += (s - bgState.s) * 0.08;
-    const heroK = Math.max(0, 1 - scrollY / (innerHeight * 0.9));
-    const target = 0.26 + 0.74 * heroK;
+    // same frame as the CSS hero: one mockup pixel = m CSS px, artwork pinned to the right edge
+    const W = innerWidth, Hh = innerHeight, phone = W < 900;
+    const m = phone ? W / 640 : Math.min(W, Hh * 1506 / 847) / 1506;
+    const ox = W - 1506 * m;
+    let oy = phone ? Math.max(Hh, 620) - 847 * m * 0.8 : (Hh - 847 * m) / 2;
+    bgState.s += (Math.min(scrollY, Hh * 1.2) - bgState.s) * 0.2;
+    oy -= bgState.s * 0.55;
+    const heroK = Math.max(0, 1 - scrollY / (Hh * 0.9));
+    const target = (0.3 + 0.7 * heroK) * (phone ? 0.8 : 1);
     bgState.h += (target - bgState.h) * 0.08;
     gl.uniform2f(uR, cv.width, cv.height);
+    gl.uniform2f(uO, ox * scale, oy * scale);
+    gl.uniform1f(uK, m * scale);
     gl.uniform1f(uT, reduce ? 0 : now / 1000);
-    gl.uniform2f(uM, bgState.mx, bgState.my);
-    gl.uniform1f(uS, bgState.s);
+    gl.uniform2f(uM, reduce ? 0 : bgState.mx, reduce ? 0 : bgState.my);
     gl.uniform1f(uH, bgState.h);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     requestAnimationFrame(frame);
@@ -1008,7 +1023,8 @@ function setActive(id) {
   links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
   const a = links.find(l => l.classList.contains('active'));
   if (!a) { ind.style.opacity = 0; return; }
-  ind.style.opacity = 1; ind.style.left = (a.offsetLeft + 16) + 'px'; ind.style.width = (a.offsetWidth - 32) + 'px';
+  const m = Math.min(innerWidth, innerHeight * 1506 / 847) / 1506;
+  ind.style.opacity = 1; ind.style.left = (a.offsetLeft - 17.5 * m) + 'px'; ind.style.width = (a.offsetWidth + 35 * m) + 'px';
 }
 const hudIdx = document.querySelector('.hud-idx'), hudName = document.querySelector('.hud-name');
 const secs = [...document.querySelectorAll('[data-section]')];
