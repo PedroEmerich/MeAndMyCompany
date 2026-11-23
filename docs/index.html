@@ -78,12 +78,11 @@ button,input,textarea{font:inherit;color:inherit}
 .side-hud i{width:1px;height:46px;background:var(--line-2)}
 
 /* ---------- nav (laid out on the mockup grid) ---------- */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:calc(130*var(--m));transition:background .5s,backdrop-filter .5s,transform .6s var(--ease),border-color .5s;border-bottom:1px solid transparent}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;height:calc(130*var(--m));transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
 .nav.scrolled{background:rgba(8,8,9,.62);border-color:var(--line);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
-.nav.hide{transform:translateY(-100%)}
 .brand{position:absolute;left:calc(92*var(--m));top:calc(45*var(--m));display:flex;align-items:flex-start}
 .brand .emark{width:calc(82*var(--m));height:calc(66*var(--m));display:block}
-.brand-sep{width:calc(2*var(--m));height:calc(64*var(--m));margin-left:calc(21*var(--m));background:rgba(255,255,255,.85)}
+.brand-sep{width:calc(2*var(--m));height:calc(64*var(--m));background:rgba(255,255,255,.85)}
 .brand-txt{position:relative;margin-left:calc(26*var(--m));width:calc(210*var(--m));height:calc(66*var(--m));font-family:'Montserrat',sans-serif;line-height:1;white-space:nowrap}
 .brand-txt b{position:absolute;left:calc(-4*var(--m));top:calc(-6.2*var(--m));font-size:calc(43*var(--m));font-weight:600;letter-spacing:.005em}
 .brand-txt span{position:absolute;left:0;top:calc(41.8*var(--m));font-size:calc(25.9*var(--m));font-weight:400;letter-spacing:.01em;color:rgba(255,255,255,.88)}
@@ -184,16 +183,6 @@ section{position:relative}
 .svc-orbit::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--or);box-shadow:0 0 18px var(--or)}
 .svc-orbit.o2{width:86%;animation-duration:40s;animation-direction:reverse;border-style:solid;border-color:var(--line)}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ---------- marquee ---------- */
-.marquee{padding:34px 0;border-block:1px solid var(--line);overflow:hidden;background:rgba(5,5,5,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.mq-row{display:flex;white-space:nowrap;will-change:transform}
-.mq-row+.mq-row{margin-top:12px}
-.mq-in{display:flex;flex-shrink:0}
-.mq-row span{font-size:clamp(34px,5.4vw,76px);font-weight:800;letter-spacing:-.035em;padding:0 .4em;display:inline-flex;align-items:center;gap:.8em;line-height:1.05}
-.mq-row span::after{content:"";width:.32em;height:.32em;background:var(--or);transform:skewX(-20deg);border-radius:2px}
-.mq-row.outline span{color:transparent;-webkit-text-stroke:1.5px rgba(247,244,241,.35)}
-.mq-row.outline span::after{background:transparent;border:1.5px solid rgba(255,106,0,.6)}
 
 /* ---------- projects ---------- */
 .projects{padding:clamp(100px,13vw,180px) 0}
@@ -336,8 +325,7 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
   .nav-links,.nav-contact{display:none}
   .burger{display:block}
   .brand{left:20px;top:16px}
-  .brand .emark{width:50px;height:40px}
-  .brand-sep{width:1.5px;height:40px;margin-left:13px}
+  .brand-sep{width:1.5px;height:40px}
   .brand-txt{margin-left:15px;width:auto;height:40px}
   .brand-txt b{position:static;display:block;font-size:24px;margin-top:-1px}
   .brand-txt span{position:static;display:block;font-size:14.5px;margin-top:3px}
@@ -410,7 +398,6 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
 
 <header class="nav">
   <a href="#inicio" class="brand" aria-label="EMERICH Tech Solution — início">
-    <svg class="emark" viewBox="0 0 82 66" aria-hidden="true"><use href="#emark"/></svg>
     <span class="brand-sep" aria-hidden="true"></span>
     <span class="brand-txt"><b>EMERICH</b><span>Tech Solution</span></span>
   </a>
@@ -535,12 +522,6 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
         </article>
       </div>
     </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <section class="marquee" aria-label="Tecnologias">
-    <div class="mq-row" data-dir="-1"><div class="mq-in"><span>Angular</span><span>React</span><span>Node.js</span><span>TypeScript</span><span>Delphi</span><span>Flutter</span><span>Python</span></div></div>
-    <div class="mq-row outline" data-dir="1"><div class="mq-in"><span>SQL Server</span><span>PostgreSQL</span><span>MySQL</span><span>Protheus</span><span>ADVPL</span><span>Java</span><span>Git</span></div></div>
   </section>
 
   <!-- PROJECTS -->
@@ -1007,17 +988,10 @@ document.getElementById('form').addEventListener('submit', e => {
 });
 document.querySelectorAll('.field input,.field textarea').forEach(i => i.addEventListener('input', () => i.closest('.field').classList.remove('err')));
 
-/* ================= nav: scrolled / hide / active indicator ================= */
+/* ================= nav: scrolled / active indicator ================= */
 const nav = document.querySelector('.nav'), ind = document.querySelector('.nav-ind');
 const links = [...document.querySelectorAll('.nav-links a')];
-let lastY = 0;
-function navScroll() {
-  const y = scrollY;
-  nav.classList.toggle('scrolled', y > 40);
-  nav.classList.toggle('hide', y > lastY + 4 && y > innerHeight * 0.8 && !root.classList.contains('menu-open'));
-  if (y < lastY - 4 || y < innerHeight * 0.8) nav.classList.remove('hide');
-  lastY = y;
-}
+function navScroll() { nav.classList.toggle('scrolled', scrollY > 40); }
 addEventListener('scroll', navScroll, { passive: true });
 function setActive(id) {
   links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
@@ -1089,25 +1063,6 @@ svcs.forEach((svc, i) => {
   });
 });
 gsap.utils.toArray('.svc-vis .big').forEach(b => gsap.fromTo(b, { yPercent: 25 }, { yPercent: -15, ease: 'none', scrollTrigger: { trigger: b.closest('.svc'), start: 'top bottom', end: 'bottom top', scrub: true } }));
-
-// marquee with scroll velocity
-const rows = [...document.querySelectorAll('.mq-row')].map(row => {
-  const inner = row.querySelector('.mq-in');
-  for (let k = 0; k < 3; k++) row.appendChild(inner.cloneNode(true));
-  return { row, dir: +row.dataset.dir, x: 0, w: inner.offsetWidth };
-});
-let vel = 0;
-ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => vel = s.getVelocity() });
-addEventListener('resize', () => rows.forEach(r => r.w = r.row.querySelector('.mq-in').offsetWidth));
-gsap.ticker.add(() => {
-  const boost = Math.min(Math.abs(vel) / 220, 14);
-  rows.forEach(r => {
-    r.x += r.dir * (0.6 + boost);
-    if (r.x <= -r.w) r.x += r.w; if (r.x > 0) r.x -= r.w;
-    r.row.style.transform = `translate3d(${r.x}px,0,0) skewX(${gsap.utils.clamp(-10, 10, -vel / 300) * r.dir}deg)`;
-  });
-  vel *= 0.92;
-});
 
 // projects
 gsap.fromTo('.pcard', { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1.3, ease: 'expo.out', stagger: 0.12, clearProps: 'opacity,transform', scrollTrigger: { trigger: '.bento', start: 'top 85%' } });
