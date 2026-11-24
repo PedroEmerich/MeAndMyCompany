@@ -205,6 +205,15 @@ section{position:relative}
 .p-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform 1.4s var(--ease)}
 .p-feat .p-media{margin:14px 14px 14px 0;border-radius:18px;border:1px solid var(--line)}
 .p-feat .p-media img{top:-5%;height:110%}
+.p-radar{grid-template-columns:1.25fr 1fr}
+.p-radar .p-media{margin:14px 0 14px 14px}
+.p-radar .p-media img{top:0;height:100%;object-position:left center}
+.p-radar .p-media::after{background:linear-gradient(270deg,rgba(5,5,5,.5),transparent 30%),linear-gradient(0deg,rgba(5,5,5,.35),transparent 40%)}
+.p-radar .p-media .p-inset{position:absolute;inset:auto 18px 18px auto;z-index:1;width:24%;height:auto;border-radius:12px;border:1px solid var(--line-2);box-shadow:0 24px 50px -16px rgba(0,0,0,.85)}
+.pcard:hover .p-media .p-inset{transform:translateY(-6px)}
+.p-soon{margin-top:28px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,106,0,.4);background:rgba(255,106,0,.08);font-size:13.5px;font-weight:600;color:var(--peach)}
+.p-soon i{width:7px;height:7px;border-radius:50%;background:var(--or);box-shadow:0 0 0 0 rgba(255,106,0,.6);animation:soon 2s infinite}
+@keyframes soon{70%{box-shadow:0 0 0 8px rgba(255,106,0,0)}100%{box-shadow:0 0 0 0 rgba(255,106,0,0)}}
 .p-feat .p-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.55),transparent 30%),linear-gradient(0deg,rgba(5,5,5,.4),transparent 40%)}
 .pcard:hover .p-media img,.demo:hover .p-media img{transform:scale(1.05)}
 .p-sched{grid-column:span 8;padding:clamp(24px,3vw,36px)}
@@ -426,6 +435,9 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
   .demo p{font-size:13.5px}
   .p-sched .dots{margin-top:14px}
   .p-cat{display:flex}
+  .p-radar .p-media{margin:10px 10px 0}
+  .p-radar .p-media .p-inset{width:30%;inset:auto 10px 10px auto;border-radius:9px}
+  .p-soon{margin-top:16px;font-size:13px}
   .p-cat .p-media{margin:10px 10px 0;border-radius:14px;aspect-ratio:16/10}
   .p-cat .p-body{padding:18px 20px 22px}
   .p-link{padding-top:16px}
@@ -731,6 +743,20 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
             <span class="p-link">Ver catálogo <svg aria-hidden="true"><use href="#i-out"/></svg></span>
           </div>
         </a>
+
+        <article class="pcard p-feat p-radar glass spot" data-cat="gestao">
+          <div class="p-media">
+            <img src="img/projeto-radar.jpg" alt="Radar Leilões: mapa com imóveis de leilão agrupados por região, filtros e agenda de leilões" width="1200" height="750" loading="lazy">
+            <img class="p-inset" src="img/projeto-radar-ficha.jpg" alt="Ficha de um imóvel no Radar Leilões, com preço, desconto e avaliação" width="420" height="751" loading="lazy">
+          </div>
+          <div class="p-body">
+            <div class="p-kicker"><i></i>Sistema · Portfólio</div>
+            <h3 style="margin-top:14px">Radar Leilões</h3>
+            <p>Mapa interativo que monitora mais de 3.600 imóveis de leilão da Caixa, Lance Judicial, Zukerman e Leilão Imóvel. Filtros por fonte, tipo, preço e desconto, agenda dos próximos leilões e ficha de cada imóvel com calculadora, checklist e histórico de preço.</p>
+            <div class="tags"><span>Mapa interativo</span><span>Coleta de dados</span><span>Filtros</span><span>Alertas</span><span>Dashboard</span></div>
+            <span class="p-soon"><i></i>Demonstração em breve</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
