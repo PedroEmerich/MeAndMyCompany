@@ -205,18 +205,19 @@ section{position:relative}
 .p-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform 1.4s var(--ease)}
 .p-feat .p-media{margin:14px 14px 14px 0;border-radius:18px;border:1px solid var(--line)}
 .p-feat .p-media img{top:-5%;height:110%}
-.p-radar{grid-template-columns:1.25fr 1fr}
-.p-radar .p-media{margin:14px 0 14px 14px}
+.p-radar{grid-column:span 8;display:flex;flex-direction:column;min-height:0}
+.p-radar .p-media{margin:14px 14px 0;aspect-ratio:16/9;min-height:0;border-radius:18px}
+.p-radar .p-body{padding:26px 28px 30px}
 .p-radar .p-media img{top:0;height:100%;object-position:left center}
-.p-radar .p-media::after{background:linear-gradient(270deg,rgba(5,5,5,.5),transparent 30%),linear-gradient(0deg,rgba(5,5,5,.35),transparent 40%)}
+.p-radar .p-media::after{background:linear-gradient(0deg,rgba(5,5,5,.35),transparent 40%)}
 .p-radar .p-media .p-inset{position:absolute;inset:auto 18px 18px auto;z-index:1;width:24%;height:auto;border-radius:12px;border:1px solid var(--line-2);box-shadow:0 24px 50px -16px rgba(0,0,0,.85)}
 .pcard:hover .p-media .p-inset{transform:translateY(-6px)}
-.p-soon{margin-top:28px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,106,0,.4);background:rgba(255,106,0,.08);font-size:13.5px;font-weight:600;color:var(--peach)}
+.p-soon{margin-top:24px;align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;border:1px solid rgba(255,106,0,.4);background:rgba(255,106,0,.08);font-size:13.5px;font-weight:600;color:var(--peach)}
 .p-soon i{width:7px;height:7px;border-radius:50%;background:var(--or);box-shadow:0 0 0 0 rgba(255,106,0,.6);animation:soon 2s infinite}
 @keyframes soon{70%{box-shadow:0 0 0 8px rgba(255,106,0,0)}100%{box-shadow:0 0 0 0 rgba(255,106,0,0)}}
 .p-feat .p-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.55),transparent 30%),linear-gradient(0deg,rgba(5,5,5,.4),transparent 40%)}
 .pcard:hover .p-media img,.demo:hover .p-media img{transform:scale(1.05)}
-.p-sched{grid-column:span 8;padding:clamp(24px,3vw,36px)}
+.p-sched{grid-column:1/-1;padding:clamp(24px,3vw,36px)}
 .p-cat{grid-column:span 4;display:flex;flex-direction:column}
 .p-cat .p-media{margin:14px 14px 0;border-radius:18px;border:1px solid var(--line);aspect-ratio:16/11;min-height:0}
 .p-cat .p-body{padding:26px 28px 30px;display:flex;flex-direction:column;flex:1}
@@ -226,7 +227,7 @@ section{position:relative}
 .pcard:hover .p-link svg,.demo:hover .p-link svg{transform:translate(3px,-3px)}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
 .p-sched>p{max-width:64ch}
-.demos{margin-top:26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.demos{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .demo{display:flex;flex-direction:column;border-radius:18px;border:1px solid var(--line);background:rgba(0,0,0,.25);overflow:hidden;transition:border-color .4s}
 .demo:hover{border-color:rgba(255,106,0,.5)}
 .demo .p-media{aspect-ratio:16/10;min-height:0;border-bottom:1px solid var(--line);display:flex;flex-direction:column}
@@ -435,6 +436,7 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
   .demo p{font-size:13.5px}
   .p-sched .dots{margin-top:14px}
   .p-cat{display:flex}
+  .p-radar{grid-column:1/-1}
   .p-radar .p-media{margin:10px 10px 0}
   .p-radar .p-media .p-inset{width:30%;inset:auto 10px 10px auto;border-radius:9px}
   .p-soon{margin-top:16px;font-size:13px}
@@ -704,7 +706,7 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
         <article class="pcard p-sched glass spot" data-cat="agendamento sites">
           <div class="p-head">
             <div>
-              <div class="p-kicker"><i></i>Sistema · 2 demonstrações</div>
+              <div class="p-kicker"><i></i>Sistema · 3 demonstrações</div>
               <h3 style="margin-top:14px">Sistema de Agendamento</h3>
             </div>
             <div class="tags"><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Three.js</span></div>
@@ -721,10 +723,20 @@ footer .brand-txt span{position:static;display:block;font-size:14.5px;margin-top
                 <span class="p-link">Abrir demonstração <svg aria-hidden="true"><use href="#i-out"/></svg></span>
               </div>
             </a>
+            <a class="demo" href="demos/bicho-feliz/" target="_blank" rel="noopener" data-cursor="DEMO">
+              <div class="p-media"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Bicho Feliz · Hotel e Creche</span></div><img src="img/projeto-bichofeliz.jpg" alt="Página inicial do Bicho Feliz, hotel e creche para pets" width="1200" height="750" loading="lazy"></div>
+              <div class="demo-body">
+                <span class="demo-k">DEMO 02 · PET</span>
+                <h4>Bicho Feliz</h4>
+                <p>Landing page e sistema de agendamento para hotel e creche de pets: hotelzinho, creche, banho e tosa e loja para o cliente; agenda, hospedagens, clientes, estoque e fotos do dia para a equipe.</p>
+                <span class="demo-hint">Acesso de cliente e equipe pelo botão <b>Entrar</b></span>
+                <span class="p-link">Abrir demonstração <svg aria-hidden="true"><use href="#i-out"/></svg></span>
+              </div>
+            </a>
             <a class="demo" href="https://pedroemerich.github.io/Clinica_Reumatologia_LP/" target="_blank" rel="noopener" data-cursor="DEMO">
               <div class="p-media"><div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Clinica_Reumatologia_LP</span></div><img src="img/projeto-clinica.jpg" alt="Página inicial da Creass Reumatologia" width="1200" height="750" loading="lazy"></div>
               <div class="demo-body">
-                <span class="demo-k">DEMO 02 · CLÍNICA</span>
+                <span class="demo-k">DEMO 03 · CLÍNICA</span>
                 <h4>Creass Reumatologia</h4>
                 <p>Agendamento de consultas pelo WhatsApp com mensagem pronta, aviso de aberto/fechado em tempo real e coluna vertebral em 3D.</p>
                 <span class="p-link">Abrir demonstração <svg aria-hidden="true"><use href="#i-out"/></svg></span>
